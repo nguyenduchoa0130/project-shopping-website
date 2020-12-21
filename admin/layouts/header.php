@@ -6,17 +6,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>Quản Lý Shop</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/project-shopping-website/public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../public/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/project-shopping-website/public/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -29,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand => Thêm link trở lại admin-->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/project-shopping-website/index.php">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-store"></i>
                 </div>
@@ -41,7 +42,7 @@
 
             <!-- Nav Item - Dashboard  => Thêm link trở lại adm in -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/project-shopping-website/admin/index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -55,7 +56,7 @@
 
             <!-- Nav Item - Dashboard  => Thêm link trở lại admin -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/project-shopping-website/admin/modules/accounts/index.php">
                     <i class="fas fa-users"></i>
                     <span> Quản Lý Tài Khoản</span>
                 </a>
@@ -69,7 +70,7 @@
 
             <!-- Nav Item - Dashboard  => Thêm link trở lại admin -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/project-shopping-website/admin/modules/category/index.php">
                     <i class="fas fa-shopping-bag"></i>
                     <span>Quản Lý Sản Phẩm</span>
                 </a>
@@ -82,7 +83,7 @@
 
             <!-- Nav Item - Dashboard  => Thêm link trở lại admin -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/project-shopping-website/admin/modules/orders/index.php">
                     <i class="fas fa-truck"></i>
                     <span>Quản Lý Đơn Hàng</span>
                 </a>
@@ -96,7 +97,7 @@
 
             <!-- Nav Item - Dashboard  => Thêm link trở lại adm in -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-tasks"></i>
                     <span>Thống Kê</span>
                 </a>
@@ -234,7 +235,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../public/admin/img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="/project-shopping-website/public/admin/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
