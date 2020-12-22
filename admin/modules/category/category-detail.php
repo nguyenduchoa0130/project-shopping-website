@@ -179,10 +179,11 @@ require_once __DIR__ . "/../../layouts/header.php";
                     <!--Body-->
                     <div class="modal-body">
                         <h4 class="modal-title w-100 text-danger" id="myModalLabel">Bạn có thật sự muốn xóa sản phẩm này ?</h4>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger">Xóa</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" id="btn-delete-product" class="btn btn-danger">Xóa</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
                     </div>
                 </div>
                 <!--/.Content-->
