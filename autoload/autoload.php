@@ -7,6 +7,6 @@
     require_once __DIR__. "/../lib/image.php";
     require_once __DIR__. "/../lib/order.php";
     session_start();
-    $database = new Database();
+    $database = new Database("localhost", "db_shopping", "root", "");
     $_SESSION["username"] = null;
 ?>
