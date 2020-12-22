@@ -11,7 +11,7 @@ require_once __DIR__ . "/../../layouts/header.php";
         $id = $_GET["id_category"];
         $name = $_GET["name"];
         $sql = "SELECT * FROM tbl_product WHERE id_category = {$id}";
-        $data = $database->fetchsql($sql);
+        $data = $database->fetchSql($sql);
     ?>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -158,7 +158,7 @@ require_once __DIR__ . "/../../layouts/header.php";
                         </button>
                     </div>
                     <!--Body-->
-                    <div class="modal-body-info p-3">
+                    <div class="modal-body modal-body-info p-3">
 
                     </div>
                 </div>
@@ -189,6 +189,7 @@ require_once __DIR__ . "/../../layouts/header.php";
                 <!--/.Content-->
             </div>
         </div>
+        <!-- Content Row Thông Báo-->
         <div class="modal fade" id="showNotification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <!--Content-->
@@ -202,7 +203,7 @@ require_once __DIR__ . "/../../layouts/header.php";
                     </div>
                     <!--Body-->
                     <div class="modal-body content-notifation">
-                       
+
                     </div>
                     <!--Footer-->
                     <div class="modal-footer">
