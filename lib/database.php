@@ -35,7 +35,6 @@ class Database
     public function insert($table, array $data)
     {
         $sqlStr = createInsertSql($table, $data);
-        return $sqlStr;
         $query = $this->connection->prepare($sqlStr);
         return $query->execute();
     }
