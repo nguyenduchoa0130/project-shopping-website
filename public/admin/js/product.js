@@ -12,6 +12,7 @@ $(document).ready(function () {
         $(".modal-body-info").html(data);
       },
     });
+
   });
   $("#formAddProduct").on("submit", function (event) {
     event.preventDefault();
