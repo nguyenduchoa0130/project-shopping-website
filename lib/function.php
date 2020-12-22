@@ -15,7 +15,7 @@ function handleDataFormCategory($data)
 function createFormProductDetail($id_category, $name_category, $product, $imgs)
 {
     $head = "
-        <form action='' method='post' id='formAddProduct' accept-charset='utf-8'>
+        <form action='' method='post' id='formUpDateProduct' accept-charset='utf-8'>
             <div class='row'>
                 <div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
                     <div class='form-group'>
