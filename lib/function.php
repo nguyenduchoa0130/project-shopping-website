@@ -78,3 +78,36 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
 function root(){
     return "http://localhost/project-shopping-website/";
 }
+function createInsertSql($table, array $data)
+{
+    $sqlStr = "INSERT INTO `{$table}`(";
+    foreach ($data as $key => $value) {
+        $sqlStr .= "`" . $key . "`" . ",";
+    }
+    $sqlStr = substr($sqlStr, 0, strlen($sqlStr) - 1);
+    $sqlStr .= ") VALUES(";
+    foreach ($data as $key => $value) {
+        if (is_string($value)) {
+            $sqlStr .= "N'" . ($value) . "'" . ",";
+        } else {
+            $sqlStr .= $value . ",";
+        }
+    }
+    $sqlStr = substr($sqlStr, 0, strlen($sqlStr) - 1);
+    $sqlStr .= ")";
+    return $sqlStr;
+}
+function createUpdateSql($table, $id_name, $val, array $data)
+{
+    $sqlStr = "UPDATE `{$table}` SET ";
+    foreach ($data as $key => $value) {
+        if (is_string($value)) {
+            $sqlStr .= "`" . $key . "`" . "=" . "N'" . $value . "'" . ",";
+        } else {
+            $sqlStr .= "`" . $key . "`" . "=" .  $value . ",";
+        }
+    }
+    $sqlStr = substr($sqlStr, 0, strlen($sqlStr) - 1);
+    $sqlStr .= " WHERE `{$id_name}` = $val";
+    return $sqlStr;
+}
