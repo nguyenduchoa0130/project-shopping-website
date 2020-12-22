@@ -55,11 +55,11 @@
 <script src="/project-shopping-website/public/admin/vendor/chart.js/Chart.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/project-shopping-website/public/admin/js/demo/chart-area-demo.js"></script>
-<script src="/project-shopping-website/public/admin/js/demo/chart-pie-demo.js"></script>
-<script src="/project-shopping-website/public/admin/js/load-info-product.js"></script>
-<script src="/project-shopping-website/public/admin/js/add-product.js"></script>
-<script src="/project-shopping-website/public/admin/js/add-category.js"></script>
+<script src="/project-shopping-website-beta/public/admin/js/demo/chart-area-demo.js"></script>
+<script src="/project-shopping-website-beta/public/admin/js/demo/chart-pie-demo.js"></script>
+<script src="/project-shopping-website-beta/public/admin/js/category.js"></script>
+<script src="/project-shopping-website-beta/public/admin/js/product.js"></script>
+
 
 </body>
 
