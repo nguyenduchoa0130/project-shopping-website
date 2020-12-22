@@ -13,7 +13,7 @@ $(document).ready(function () {
         setTimeout(function () {
           $("#showNotification").modal("hide");
           location.reload(); 
-        }, 2000);
+        }, 1000);
       },
     });
   });
