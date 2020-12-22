@@ -66,7 +66,7 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
                 <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                     <div class='modal-footer'>
                         <button type='submit' id='btn-update-info' class='btn btn-success m-auto  waves-effect waves-light'>Cập Nhật</button>
-                        <button type='button' id='btn-delete-info' class='btn btn-danger m-auto waves-effect waves-light' data-toggle='modal' data-target='#verifyDelete'>Xóa</button>
+                        <button type='button' id='btn-delete-info' class='btn btn-danger m-auto waves-effect waves-light' data-toggle='modal' data-target='#btnVerifyDelete'>Xóa</button>
                         <button type='button' class='btn btn-warning m-auto' data-dismiss='modal'>Đóng</button> 
                     </div>
                 </div>
