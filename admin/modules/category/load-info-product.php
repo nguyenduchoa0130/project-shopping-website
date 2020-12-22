@@ -17,7 +17,6 @@ if ($_POST["id_product"] && $_POST["id_category"] && $_POST["name_category"]) {
                 This is a info alert with <a href='#' class='alert-link'>an example link</a>. Give it a click if you like.
             </div>
             ";
-    }
-    
+    } 
 }
 ?>
