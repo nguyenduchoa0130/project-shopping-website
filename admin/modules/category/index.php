@@ -23,7 +23,7 @@ require_once __DIR__ . "/../../layouts/header.php";
 
     <!-- Content Row -->
     <?php
-    $categories = $database->fetchAll("tbl_category");
+    $categories = $database->fetchDataAll("tbl_category");
     if ($categories != null) {
         foreach ($categories as $category) {
             $item = new Category($category);
