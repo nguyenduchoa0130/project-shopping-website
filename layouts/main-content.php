@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                             <ul>
-                                <li>Sản Phẩm 1</li>
+                                <li>Laptop Dell</li>
                                 <li>Sản Phẩm 2</li>
                                 <li>Sản Phẩm 3</li>
                             </ul>
