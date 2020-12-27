@@ -29,8 +29,7 @@ class Database
     {
         $query = $this->connection->prepare("SELECT * FROM `{$table}` WHERE `{$id_name}` = {$val}");
         $query->execute();
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        return $data;
+        return $data = $query->fetchAll();
     }
     public function insert($table, array $data)
     {
