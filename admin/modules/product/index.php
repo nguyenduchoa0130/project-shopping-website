@@ -57,8 +57,8 @@ require_once __DIR__ . "/../../layouts/header.php";
 
             <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                 <div id="product-information" class="container-fluid border rounded border-info">
-                    <div class="container-fluid text-center">
-                        <p class="h3 mb-0 text-gray-800 font-weight-bold"> Thông Tin Sản Phẩm</p>
+                    <div class="container-fluid text-center mt-2">
+                        <p class="h3 text-gray-800 font-weight-bold"> Thông Tin Sản Phẩm</p>
                     </div>
                     <hr class="my-3 bg-info">
                     <div class="container-fluid">
