@@ -50,10 +50,9 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
         <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
         ";
     foreach($imgs as $img){
-        $item = new ImageProduct($img);
         $middle_start.= "
                         <div class='card mb-3' style='width: 80%;'>
-                            <img class='card-img-top' src='{$item->get_Link()}' alt='Hình Ảnh Sản Phẩm'>
+                            <img class='card-img-top' src='{$img->get_Link()}' alt='Hình Ảnh Sản Phẩm'>
                         </div>
                         ";
     }
@@ -67,7 +66,6 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
                     <div class='modal-footer'>
                         <button type='submit' class='btn btn-success m-auto  waves-effect waves-light'>Cập Nhật</button>
                         <button type='button' class='btn btn-danger m-auto waves-effect waves-light' data-toggle='modal' data-target='#verifyDelete'>Xóa</button>
-                        <button type='button' class='btn btn-warning m-auto' data-dismiss='modal'>Đóng</button> 
                     </div>
                 </div>
             </div>
