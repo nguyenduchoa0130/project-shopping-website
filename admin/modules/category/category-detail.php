@@ -16,14 +16,16 @@ require_once __DIR__ . "/../../layouts/header.php";
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="javascript:history.back()">
-                <span><i class="fas fa-truck"></i></span>
-                Quản Lý Đơn Sản Phẩm | <?php echo $name ?>
+                <span><i class="fas fa-shopping-bag"></i></span>
+                Quản Lý Sản Phẩm |  <span class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none"> <?php echo $name ?></span>
             </a>
-            <button type="button" class="btn btn-primary waves-effect waves-light d-inline" data-toggle="modal" data-target="#addProduct">
+          
+            <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#addProduct">
                 <span><i class="fas fa-plus"></i></span>
                 Thêm Mới
             </button>
         </div>
+        
         <hr class="my-4">
 
         <table class="table">
@@ -49,7 +51,7 @@ require_once __DIR__ . "/../../layouts/header.php";
                             <td>{$item->get_Price()}</td>
                             <td>{$item->get_Quantity()}</td>
                             <td class='text-right'>
-                                <a class='btn btn-primary waves-effect waves-light' data-id='{$item->get_IdProduct()}' data-idcategory='{$id}' data-ncategory='{$name}' data-toggle='modal' data-target='#infoProduct' >
+                                <a href='../product/index.php?id_product={$item->get_IdProduct()}&name_category={$name}' class='btn btn-primary waves-effect waves-light'>
                                     <span><i class='fas fa-info-circle'></i></span>
                                      Chi Tiết Sản Phẩm
                                 </a>
@@ -141,50 +143,6 @@ require_once __DIR__ . "/../../layouts/header.php";
                     </div>
                     <!--Footer-->
 
-                </div>
-                <!--/.Content-->
-            </div>
-        </div>
-        <!-- Content Row Thông Tin Sản Phẩm-->
-        <div class="modal fade" id="infoProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <!--Content-->
-                <div class="modal-content">
-                    <!--Header-->
-                    <div class="modal-header text-center  bg-primary text-light">
-                        <h4 class="font-weight-bold modal-title w-100" id="myModalLabel">Thông Tin Sản Phẩm</h4>
-                        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Body-->
-                    <div class="modal-body modal-body-info p-3">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Content Row Xác Nhận Xóa-->
-        <div class="modal fade" id="verifyDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <!--Content-->
-                <div class="modal-content">
-                    <!--Header-->
-                    <div class="modal-header bg-info">
-                        <h4 class="modal-title w-100 text-white font-weight-bold" id="myModalLabel"><span><i class="fas fa-exclamation-triangle"></i></span> Cánh Báo</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Body-->
-                    <div class="modal-body">
-                        <h4 class="modal-title w-100 text-danger" id="myModalLabel">Bạn có thật sự muốn xóa sản phẩm này ?</h4>
-                    </div>
-                    <!--Footer-->
-                    <div class="modal-footer">
-                        <button type="button" id="btn-delete-product" class="btn btn-danger">Xóa</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                    </div>
                 </div>
                 <!--/.Content-->
             </div>
