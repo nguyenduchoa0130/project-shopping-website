@@ -17,15 +17,15 @@ require_once __DIR__ . "/../../layouts/header.php";
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="javascript:history.back()">
                 <span><i class="fas fa-shopping-bag"></i></span>
-                Quản Lý Sản Phẩm |  <span class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none"> <?php echo $name ?></span>
+                Quản Lý Sản Phẩm | <span class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none"> <?php echo $name ?></span>
             </a>
-          
+
             <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#addProduct">
                 <span><i class="fas fa-plus"></i></span>
                 Thêm Mới
             </button>
         </div>
-        
+
         <hr class="my-4">
 
         <table class="table">
