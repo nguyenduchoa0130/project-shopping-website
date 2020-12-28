@@ -15,7 +15,7 @@ $(document).ready(function () {
       data: { values },
       success: function (data) {
           $("#product-notification").modal("show");
-          $("#product-notifi-content").html(data);
+          $(".product-notifi-content").html(data);
           setTimeout(()=>{
             $("#product-notification").modal("hide");
             location.reload();
