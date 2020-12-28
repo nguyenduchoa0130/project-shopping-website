@@ -72,7 +72,7 @@ require_once __DIR__ . "/../../layouts/header.php";
                     </div>
                     <hr class="my-3 bg-info">
                     <div class="container-fluid">
-                        <?php echo createFormProductDetail($product->get_IdProduct(), $name_category, $product, $imgs); ?>
+                        <?php echo createFormProductDetail($product->get_IdCategory(), $name_category, $product, $imgs); ?>
                     </div>
                 </div>
             </div>
