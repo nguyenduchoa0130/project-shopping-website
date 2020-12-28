@@ -1,9 +1,9 @@
 <?php
     require_once __DIR__ . "/../../../autoload/autoload.php";
-    if($_POST["values"] && $_POST["id_product"]){
+    if($_POST["values"]){
         $data = $_POST["values"];
-        $id_product = $_POST["id_product"];
         $props = handleDataFormCategory($data);
+        $id_product = array_shift($props);
         array_pop($props);
         try{
             $database->update("tbl_product", "id_product", $id_product, $props);
