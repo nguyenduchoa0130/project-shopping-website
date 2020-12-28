@@ -18,7 +18,7 @@ $(document).ready(function () {
           $(".product-notifi-content").html(data);
           setTimeout(()=>{
             $("#product-notification").modal("hide");
-            location.reload();
+            location.reload();  
           }, 1000);
       }
     });

@@ -18,6 +18,9 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
         <form action='' method='post' id='formUpdateProduct' accept-charset='utf-8'>
             <div class='row'>
                 <div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+                    <div class='form-group d-none'>
+                        <input class='form-control' id='id_product' name='id_product' type='text' value='{$product->get_IdProduct()}' readonly>
+                    </div>
                     <div class='form-group'>
                         <label for='name_product'>Tên Sản Phẩm</label>
                         <input class='form-control' id='name_product' name='name_product' type='text' placeholder='Tên Sản Phẩm' value='{$product->get_NameProduct()}' required>
