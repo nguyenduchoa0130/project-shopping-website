@@ -5,7 +5,7 @@ $(document).ready(function () {
     $.ajax({
       type: "post",
       url:
-        "/project-shopping-website-beta/admin/modules/category/add-category.php",
+        "/project-shopping-website/admin/modules/category/add-category.php",
       contentType: "application/x-www-form-urlencoded;charset=UTF-8",
       data: { values },
       success: function (data) {
@@ -23,7 +23,7 @@ $(document).ready(function () {
       $.ajax({
         type: "post",
         url:
-          "/project-shopping-website-beta/admin/modules/category/remove-category.php",
+          "/project-shopping-website/admin/modules/category/remove-category.php",
         data: { id_category: id },
         success: function (data) {
           $(".content-notifation-remove").html(data);
@@ -45,7 +45,7 @@ $(document).ready(function () {
       $.ajax({
         type: "post",
         url:
-          "/project-shopping-website-beta/admin/modules/category/update-category.php",
+          "/project-shopping-website/admin/modules/category/update-category.php",
         contentType: "application/x-www-form-urlencoded;charset=UTF-8",
         data: { values, id_category: id_category },
         success: function (data) {
