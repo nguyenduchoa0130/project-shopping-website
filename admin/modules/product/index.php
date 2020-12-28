@@ -21,9 +21,13 @@ require_once __DIR__ . "/../../layouts/header.php";
     <?php if ($product) : ?>
         <?php
         $data_img = $database->fetchDataById("tbl_product_img", "id_product", $id_product);
-        $imgs = array();
-        foreach ($data_img as $img) {
-            array_push($imgs, new ImageProduct($img));
+        if ($data_img) {
+            $imgs = array();
+            foreach ($data_img as $img) {
+                array_push($imgs, new ImageProduct($img));
+            }
+        } else {
+            $imgs = null;
         }
         ?>
         <!-- Page Heading -->
@@ -42,23 +46,29 @@ require_once __DIR__ . "/../../layouts/header.php";
         <div class="row">
 
             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                <div class="card border-primary">
-                    <img id="img-product-main" class="card-img-top" src="<?php echo $imgs[0]->get_Link(); ?>" alt="Image Product">
-                    <hr class="my-2 bg-primary">
-                    <div class="card-body m-2 d-flex justify-content-center">
-                        <?php foreach ($imgs as $img) : ?>
-                            <a class="d-inline text-decoration-none btn-change-product-image">
-                                <img class="w-75 img-thumbnail" src="<?php echo $img->get_Link(); ?>" alt="Image Product">
-                            </a>
-                        <?php endforeach; ?>
+                <?php if ($imgs) : ?>
+                    <div class="card border-primary">
+                        <img id="img-product-main" class="card-img-top" src="<?php echo $imgs[0]->get_Link(); ?>" alt="Image Product">
+                        <hr class="my-2 bg-primary">
+                        <div class="card-body m-2 d-flex justify-content-center">
+                            <?php foreach ($imgs as $img) : ?>
+                                <a class="d-inline text-decoration-none btn-change-product-image">
+                                    <img class="w-75 img-thumbnail" src="<?php echo $img->get_Link(); ?>" alt="Image Product">
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-                </div>
+                <?php else : ?>
+                    <div class="alert alert-warning" role="alert">
+                        Có lỗi đã xảy ra !!!
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                 <div id="product-information" class="container-fluid border rounded border-info">
-                    <div class="container-fluid text-center mt-2">
-                        <p class="h3 text-gray-800 font-weight-bold"> Thông Tin Sản Phẩm</p>
+                    <div class="container-fluid text-center">
+                        <p class="h3 mb-0 text-gray-800 font-weight-bold"> Thông Tin Sản Phẩm</p>
                     </div>
                     <hr class="my-3 bg-info">
                     <div class="container-fluid">
@@ -83,7 +93,7 @@ require_once __DIR__ . "/../../layouts/header.php";
     <?php endif ?>
 
     <!-- Content Row Xác Nhận Xóa-->
-    <div class="modal fade" id="verifyDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="product-verifyDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <!--Content-->
             <div class="modal-content">
@@ -108,6 +118,29 @@ require_once __DIR__ . "/../../layouts/header.php";
         </div>
     </div>
 
+    <div class="modal fade" id="product-notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title w-100 text-white font-weight-bold" id="myModalLabel"><span><i class="fas fa-exclamation-triangle"></i></span> Cánh Báo</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body product-notifi-content">
+
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
 </div>
 <!-- TODO Nội dung trang -->
 <?php
