@@ -58,4 +58,24 @@ $(document).ready(function () {
       });
     });
   });
+  $("#formAddProduct").on("submit", function (event) {
+    event.preventDefault();
+    let values = $("#formAddProduct").serialize();
+    $.ajax({
+      type: "post",
+      url:
+        "/project-shopping-website/admin/modules/product/add-product.php",
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      data: { values },
+      success: function (data) {
+        $("#showNotification").modal("show");
+        $(".content-notifation").html(data);
+        setTimeout(function () {
+          $("#showNotification").modal("hide");
+          $("#addCategory").modal("hide");
+          location.reload();
+        }, 1000);
+      },
+    });
+  });
 });
