@@ -49,12 +49,14 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
     $middle_start = "
         <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
         ";
-    foreach($imgs as $img){
-        $middle_start.= "
-                        <div class='card mb-3' style='width: 80%;'>
-                            <img class='card-img-top' src='{$img->get_Link()}' alt='Hình Ảnh Sản Phẩm'>
-                        </div>
-                        ";
+    if ($imgs) {
+        foreach ($imgs as $img) {
+            $middle_start .= "
+                            <div class='card mb-3' style='width: 80%;'>
+                                <img class='card-img-top' src='{$img->get_Link()}' alt='Hình Ảnh Sản Phẩm'>
+                            </div>
+                            ";
+        }
     }
     $middel_end = "
                  </div>
@@ -71,9 +73,10 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
             </div>
         </form>
                 ";
-    return $head.$middle_start.$middel_end.$foot;
+    return $head . $middle_start . $middel_end . $foot;
 }
-function root(){
+function root()
+{
     return "http://localhost/project-shopping-website/";
 }
 function createInsertSql($table, array $data)
