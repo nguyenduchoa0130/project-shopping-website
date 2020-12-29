@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-outline-info btn-lg"><span><i class="fas fa-shopping-cart mr-3"></i></span>Giỏ Hàng</button>
             </li>
             <li class="nav-item ml-3">
-                <a class="nav-link h5" href="layouts/login.php"><span class="mr-3"><i class="fas fa-user"></i></span>Đăng Nhập</a>
+                <a class="nav-link h5" href="modules/account/login.php"><span class="mr-3"><i class="fas fa-user"></i></span>Đăng Nhập</a>
             </li>
             <li class="nav-item ml-3">
                 <a class="nav-link h5" href="/project-shopping-website/admin"><span class="mr-3"><i class="fas fa-user"></i></span>Admin</a>

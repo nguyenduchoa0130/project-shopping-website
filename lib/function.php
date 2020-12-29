@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . "/../autoload/autoload.php";
-function handleDataFormCategory($data)
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+function handleDataForm($data)
 {
     $props = array();
     $arr = explode("&", $data);
@@ -114,4 +117,66 @@ function createUpdateSql($table, $id_name, $val, array $data)
     $sqlStr = substr($sqlStr, 0, strlen($sqlStr) - 1);
     $sqlStr .= " WHERE `{$id_name}` = $val";
     return $sqlStr;
+}
+function checkData($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+function sendEmail($to, $subject, $content)
+{
+    // Instantiation and passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'duynguyen2510abc@gmail.com';                     // SMTP username
+        $mail->Password   = '123abcxyz~';                               // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+        $mail->CharSet = 'UTF-8';
+        //Recipients
+        $mail->setFrom('duynguyen2510abc@gmail.com', "Happy Shopping");
+        $mail->addAddress($to);     // Add a recipient
+
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $content;
+
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+function createFormVerifyOTP($email){
+    return 
+    "
+    <h5 class='card-title text-center text-success font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Xác Thực Tài Khoản</h5>
+    <hr>
+    <form class='form-signin' action='' method='post' id='register-form-verify-otp'>
+        <div class='form-label-group'>
+            <h6 class='card-title text-center text-primary font-weight-bold'> 
+                Chúng tôi đã gửi 1 mã xác thực tới {$email}
+            </h6>
+        </div>
+        <hr>
+        <div class='form-label-group'>
+            <input type='text' id='otp' name='otp' class='form-control text-center' placeholder='OTP' required autofocus>
+            <label for='otp'>OTP</label>
+        </div>
+        <div class='my-3 px-3' id='register-notification'>
+        
+        </div>
+        <div class='form-label-group'>
+            <button class='btn btn-lg btn-primary btn-block text-uppercase' type='submit'><span><i class='fas fa-envelope'></i></span> Xác thực</button>
+        </div>
+    </form>
+    ";
 }

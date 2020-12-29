@@ -8,6 +8,7 @@ class Database
         $this->connection = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $username, $password);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
+
     public function disconnect()
     {
         $this->connection = null;
@@ -29,7 +30,7 @@ class Database
     {
         $query = $this->connection->prepare("SELECT * FROM `{$table}` WHERE `{$id_name}` = {$val}");
         $query->execute();
-        return $data = $query->fetchAll();
+        return $query->fetchAll();
     }
     public function insert($table, array $data)
     {
@@ -48,5 +49,32 @@ class Database
         $sqlStr = "DELETE FROM `{$table}` WHERE `{$id_name}` = {$val}";
         $query = $this->connection->prepare($sqlStr);
         return $query->execute();
+    }
+    public function findAccountByUsername($name){
+        $sql = "SELECT * FROM `tbl_account` WHERE username = ?";
+        $query = $this->connection->prepare($sql);
+        $query->execute(array($name));
+        return $query->fetchAll();
+    }
+    public function findAccountByEmail($email){
+        $sql = "SELECT * FROM `tbl_account` WHERE `email` = ?";
+        $query = $this->connection->prepare($sql);
+        $query->execute(array($email));
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+    public function findOTPByUsername($name){
+        $sql = "SELECT * FROM `tbl_account_otp` WHERE `username` = ?";
+        $query = $this->connection->prepare($sql);
+        $query->execute(array($name));
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+    public function executeNonQuery($sql){
+        $query =  $this->connection->prepare($sql);
+        return $query->execute();
+    }
+    public function executeQuery($sql){
+        $query = $this->connection ->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
     }
 }

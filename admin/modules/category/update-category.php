@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../../autoload/autoload.php";
     if($_POST["values"] && $_POST['id_category']){
         $data = $_POST["values"];
         $id_category = $_POST['id_category'];
-        $props = handleDataFormCategory($data);
+        $props = handleDataForm($data);
         try{
             $database->update("tbl_category", "id_category", $id_category,  $props);
             echo "<h4 class='modal-title w-100 text-success' id='myModalLabel'>Cập Nhật Thành Công</h4>";

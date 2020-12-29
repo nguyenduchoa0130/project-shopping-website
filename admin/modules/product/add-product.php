@@ -2,7 +2,7 @@
 require_once __DIR__ . "/../../../autoload/autoload.php";
 if ($_POST["values"]) {
     $data = $_POST["values"];
-    $props = handleDataFormCategory($data);
+    $props = handleDataForm($data);
     array_pop($props);
     $result = $database->insert("tbl_product", $props);
     if($result){

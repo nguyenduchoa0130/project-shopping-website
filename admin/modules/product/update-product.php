@@ -2,7 +2,7 @@
     require_once __DIR__ . "/../../../autoload/autoload.php";
     if($_POST["values"]){
         $data = $_POST["values"];
-        $props = handleDataFormCategory($data);
+        $props = handleDataForm($data);
         $id_product = array_shift($props);
         array_pop($props);
         try{
