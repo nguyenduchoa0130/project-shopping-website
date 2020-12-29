@@ -8,13 +8,12 @@ $(document).ready(function(e){
             contentType: "application/x-www-form-urlencoded;charset=UTF-8",
             data: {values},
             success: function(data){
-                alert(data);
-                // let noti = JSON.parse(data);
-                // if(noti["noti_code"] === 0){
-                //     $("#register-notification").html(noti["message"]);
-                // }else if(noti["noti_code"] === 1){
-                //     $("#register-body").html(noti["message"]);
-                // }
+                let noti = JSON.parse(data);
+                if(noti["noti_code"] === 0){
+                    $("#register-notification").html(noti["message"]);
+                }else if(noti["noti_code"] === 1){
+                    $("#register-body").html(noti["message"]);
+                }
             }
           });
     });
