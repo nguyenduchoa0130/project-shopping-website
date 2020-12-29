@@ -25,7 +25,7 @@ if ($_POST["values"]) {
             sendEmail($data["email"], "Xác Thực Tài Khoản", $message);
             $checkOTP = $database->findOTPByUsername($data["username"]);
             if($checkOTP){
-                $sql = "UPDATE `tbl_account_otp` SET `otp` = {$otp} WHERE `username` = {$data['username']}";
+                $sql = "UPDATE `tbl_account_otp` SET `otp` = {$otp} WHERE `username` = '{$data['username']}'";
             }else{
                 $sql = "INSERT INTO `tbl_account_otp`(`username`, `otp`) VALUES ({$data['username']}, {$otp})";
             }
