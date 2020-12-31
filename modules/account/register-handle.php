@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../autoload/autoload.php";
 
-if ($_POST["values"]) {
+if (isset($_POST["values"])) {
     $data = handleDataForm($_POST["values"]);
     /**
      * TODO Kiểm tra dữ liệu
@@ -27,10 +27,10 @@ if ($_POST["values"]) {
             if($checkOTP){
                 $sql = "UPDATE `tbl_account_otp` SET `otp` = {$otp} WHERE `username` = '{$data['username']}'";
             }else{
-                $sql = "INSERT INTO `tbl_account_otp`(`username`, `otp`) VALUES ({$data['username']}, {$otp})";
+                $sql = "INSERT INTO `tbl_account_otp`(`username`, `otp`) VALUES ('{$data['username']}', {$otp})";
             }
             if($database->executeNonQuery($sql)){
-                $formVerifyOTP = createFormVerifyOTP($data["email"]);
+                $formVerifyOTP = createFormVerifyOTP($data['username'], $data["email"]);
                 $noti = new Notification(1, $formVerifyOTP);
             }else{
                 $noti = new Notification(0, "Lỗi thao tác khi thêm/chỉnh sửa dữ liệu");
@@ -40,6 +40,14 @@ if ($_POST["values"]) {
         $noti = new Notification(0, "Lỗi khi thao tác với database".$e->getMessage());
     }
    echo json_encode($noti);
+}else if(isset($_POST["dataForm"])){
+    $dataForm = handleDataForm($_POST["dataForm"]);
+    $form = createFormVerifyProfileUser($dataForm);
+    echo $form;
+}else if(isset($_POST["completeData"])){
+    $completeData = handleDataForm($_POST["completeData"]);
+    print_r($completeData);
+
 } else {
     echo "Có lỗi đã xảy ra !!!";
 }
