@@ -81,7 +81,8 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
                 ";
     return $head . $middle_start . $middel_end . $foot;
 }
-function createFormVerifyOTP($username, $email){
+function createFormVerifyOTP($username, $email)
+{
     return 
     "
     <h5 class='card-title text-center text-success font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Xác Thực Tài Khoản</h5>
@@ -108,7 +109,8 @@ function createFormVerifyOTP($username, $email){
     </form>
     ";
 }
-function createFormVerifyProfileUser(array $account){
+function createFormVerifyProfileUser(array $account)
+{
     return 
     "
     <div class='card-body'>
@@ -162,6 +164,13 @@ function createFormVerifyProfileUser(array $account){
                     </div>
                 </div>
             </div>
+            <div class='row'>
+            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                <div class='my-3 px-3' id='register-notification'>
+
+                </div>
+            </div>
+             </div>
             <div class='row'>
                 <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                     <div class='form-label-group'>

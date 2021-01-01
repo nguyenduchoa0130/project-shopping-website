@@ -11,6 +11,5 @@
     require_once __DIR__. "/../public/user/vendor/autoload.php";
     session_start();
     $database = new Database("localhost", "db_shopping", "root", "");
-    $_SESSION["errors"] = null;
-    $_SESSION["username"] = null;
+    $_SESSION["username"] = null;// lưu tên đăng nhập của người dùng
 ?>

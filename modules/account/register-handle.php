@@ -46,8 +46,15 @@ if (isset($_POST["values"])) {
     echo $form;
 }else if(isset($_POST["completeData"])){
     $completeData = handleDataForm($_POST["completeData"]);
-    print_r($completeData);
-
+    $noti = null;
+    try{
+        $database->insert("tbl_account", $completeData);
+        $noti = new Notification(1, "../index.php");
+        $_SESSION["username"] = $completeData["username"];
+    }catch(PDOException $e){
+        $noti = new Notification(0, "Lỗi thao tác với database ". $e->getMessage());
+    }
+    echo json_encode($noti);
 } else {
     echo "Có lỗi đã xảy ra !!!";
 }
