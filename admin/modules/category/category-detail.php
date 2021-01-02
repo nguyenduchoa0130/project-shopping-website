@@ -1,17 +1,15 @@
 <?php
-require_once __DIR__ . "/../../../autoload/autoload.php";
-?>
-<?php
-require_once __DIR__ . "/../../layouts/header.php";
+    require_once __DIR__ . "/../../../autoload/autoload.php";
+    require_once __DIR__ . "/../../layouts/header.php";
 ?>
 <!-- TODO Nội dung trang -->
 <div class="container-fluid">
     <?php
-if (!empty($_GET["id_category"]) && !empty($_GET["name"])) {
-    $id = $_GET["id_category"];
-    $name = $_GET["name"];
-    $sql = "SELECT * FROM tbl_product WHERE id_category = {$id}";
-    $data = $database->fetchSql($sql);
+    if (!empty($_GET["id_category"]) && !empty($_GET["name"])) {
+        $id = $_GET["id_category"];
+        $name = $_GET["name"];
+        $sql = "SELECT * FROM tbl_product WHERE id_category = {$id}";
+        $data = $database->fetchSql($sql);
     ?>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -40,11 +38,11 @@ if (!empty($_GET["id_category"]) && !empty($_GET["name"])) {
             </thead>
             <tbody>
             <?php
-$count = 1;
-    if ($data) {
-        foreach ($data as $product) {
-            $item = new Product($product);
-            echo "
+            $count = 1;
+            if ($data) {
+                foreach ($data as $product) {
+                    $item = new Product($product);
+                    echo "
                         <tr class='text-center text-dark h5'>
                             <th scope='row'>{$count}</th>
                             <td>{$item->get_NameProduct()}</td>
@@ -58,23 +56,23 @@ $count = 1;
                             </td>
                         </tr>
                         ";
-            $count++;
-        }
-    } else {
-        echo "
+                    $count++;
+                }
+            } else {
+                echo "
                         <div class='alert alert-success' role='alert'>
                             Không có sản phẩm nào !
                         </div>
                     ";
-    }
-} else {
-    echo "
+            }
+        } else {
+            echo "
                     <div class='alert alert-warning' role='alert'>
                         Không Tải Được Dữ Liệu
                     </div>
                 ";
-}
-?>
+        }
+            ?>
             </tbody>
         </table>
         <!-- Content Row Thêm Sản Phẩm-->
@@ -91,9 +89,9 @@ $count = 1;
                     </div>
                     <!--Body-->
                     <div class="modal-body p-3">
-                        <form action="" method="post" id="formAddProduct" accept-charset="utf-8">
+                        <form action="/project-shopping-website/admin/modules/product/add-product.php" method="post" id="formAddProduct" enctype="multipart/form-data" accept-charset="utf-8">
                             <div class="row">
-                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label for="name_product">Tên Sản Phẩm</label>
                                         <input class="form-control" id="name_product" name="name_product" type="text" placeholder="Tên Sản Phẩm" required>
@@ -121,19 +119,17 @@ $count = 1;
                                         <label for="category">Mục</label>
                                         <input class="form-control" id="category" name="category" type="text" value="<?php echo $name ?>" readonly>
                                     </div>
-                                </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <div class="form-group">
-                                        <label for="image1">Hình Ảnh 1</label>
-                                        <input class="form-control border-0 upload-image" id="image1" name="image1" type="file" accept="image/*">
+                                    <div class="form-group border-0">
+                                        <label for="image1" class="form-label">Hình ảnh sản phẩm</label>
+                                        <input class="form-control" type="file" id="image1" name="image1">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="image2">Hình Ảnh 2</label>
-                                        <input class="form-control border-0 upload-image" id="image2" name="image2" type="file" accept="image/*">
+                                    <div class="form-group border-0">
+                                        <label for="image2" class="form-label">Hình ảnh sản phẩm</label>
+                                        <input class="form-control" type="file" id="image2" name="image2">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="image3">Hình Ảnh 3</label>
-                                        <input class="form-control border-0 upload-image" id="image3" name="image3" type="file" accept="image/*">
+                                    <div class="form-group border-0">
+                                        <label for="image3" class="form-label">Hình ảnh sản phẩm</label>
+                                        <input class="form-control" type="file" id="image3" name="image3">
                                     </div>
                                 </div>
                             </div>
@@ -147,10 +143,7 @@ $count = 1;
                             </div>
                         </form>
                     </div>
-                    <!--Footer-->
-
                 </div>
-                <!--/.Content-->
             </div>
         </div>
         <!-- Content Row Thông Báo-->
