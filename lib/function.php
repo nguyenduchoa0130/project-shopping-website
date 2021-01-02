@@ -81,6 +81,156 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
                 ";
     return $head . $middle_start . $middel_end . $foot;
 }
+function createFormVerifyOTP($username, $email)
+{
+    return 
+    "
+    <h5 class='card-title text-center text-success font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Xác Thực Tài Khoản</h5>
+    <hr>
+    <form class='form-signin' action='' method='post' id='register-form-verify-otp'>
+        <div class='form-label-group'>
+            <h6 class='card-title text-center text-primary font-weight-bold'> 
+                Chúng tôi đã gửi 1 mã xác thực tới {$email}
+            </h6>
+        </div>
+        <hr>
+        <div class='form-label-group d-none'>
+            <input type='text' id='username' name='username' class='form-control text-center' value='{$username}'>
+        </div>
+        <div class='form-group'>
+            <input type='text' id='otp' name='otp' class='form-control text-center font-weight-bold' placeholder='Mã OTP' required autofocus>
+        </div>
+        <div class='my-3 px-3' id='register-notification'>
+        
+        </div>
+        <div class='form-label-group'>
+            <button class='btn btn-lg btn-primary btn-block text-uppercase' type='submit'><span><i class='fas fa-envelope'></i></span> Xác thực</button>
+        </div>
+    </form>
+    ";
+}
+function createFormVerifyProfileUser(array $account)
+{
+    return 
+    "
+    <div class='card-body'>
+        <h5 class='card-title text-center text-primary font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Thông Tin Tài Khoản</h5>
+        <hr class='my-4'>
+        <form class='form-signin' action='' method='post' id='register-form-complete-profile'>
+            <div class='row'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                    <div class='form-label-group'>
+                        <input type='text' id='username' name='username' class='form-control' placeholder='Tên đăng nhập...' value='{$account['username']}' required readonly>
+                        <label for='username'>Tên Đăng Nhập</label>
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='password' id='password' name='password' class='form-control' placeholder='Password' value='{$account['password']}' required readonly>
+                        <label for='password'>Mật Khẩu</label>
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='email' id='email' name='email' class='form-control' placeholder='Địa chỉ email..' value='{$account['email']}' required readonly>
+                        <label for='email'>Địa Chỉ Email</label>
+                    </div>
+                </div>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                    <div class='form-label-group'>
+                        <input type='text' id='fullname' name='fullname' class='form-control' placeholder='Họ và tên' required autofocus>
+                        <label for='fullname'>Họ và tên</label>
+                    </div>
+                    <div class='form-label-group'>
+                        <div class='container-fluid d-flex justify-content-around'>
+                            <div class='form-check form-check-inline'>
+                                <input class='form-check-input' type='radio' name='gender' id='male' value='Nam' checked>
+                                <label class='form-check-label font-weight-bold' style='font-size: 18px !important;' for='male'>Nam</label>
+                            </div>
+                            <div class='form-check form-check-inline'>
+                                <input class='form-check-input' type='radio' name='gender' id='female' value='Nữ'>
+                                <label class='form-check-label font-weight-bold' style='font-size: 18px !important;' for='female'>Nữ</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='birth' id='birth' name='birth' class='form-control' placeholder='Ngày sinh' required>
+                        <label for='birth'>Ngày sinh</label>
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='phone' id='phone' name='phone' class='form-control' placeholder='Số điện thoại' required>
+                        <label for='phone'>Số điện thoại</label>
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='address' id='address' name='address' class='form-control' placeholder='Địa chỉ' required>
+                        <label for='address'>Địa chỉ</label>
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                <div class='my-3 px-3' id='register-notification'>
+
+                </div>
+            </div>
+             </div>
+            <div class='row'>
+                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                    <div class='form-label-group'>
+                        <button class='btn btn-lg btn-primary btn-block text-uppercase' type='submit'><span><i class='fas fa-user-plus'></i></span> Hoàn Tất Đăng Ký</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <a class='btn-additional btn btn-lg btn-google btn-block text-uppercase' href='login.php'><span><i class='fas fa-sign-in-alt'></i></span> Đăng Nhập</a>
+        <a class='btn-additional btn btn-lg btn-success btn-block text-uppercase' href='../../index.php'><span><i class='fas fa-arrow-left'></i></span> Trở về trang chủ</a>
+    </div> 
+        "
+    ;
+}
+function createFormForgetPassword($username){
+    return 
+    "
+    <div class='card-body' id='forget-password-content'>
+        <h5 class='card-title text-center text-primary font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Mật Khẩu Mới</h5>
+        <hr class='my-4'>
+        <form class='form-signin' action='' method='post' id='forget-password-form-complete-password'>
+            <div class='row'>
+                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                    <div class='form-label-group d-none'>
+                        <input type='text' id='username' name='username' class='form-control text-center' value='{$username}'>
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='password' id='password' name='password' class='form-control' placeholder='Mật khẩu' required >
+                        <label for='password'>Mật Khẩu</label>
+                    </div>
+                    <div class='form-label-group'>
+                        <input type='password' id='confirm-password' name='confirm-password' class='form-control' placeholder='Nhập lại mật khẩu' required >
+                        <label for='confirm-password'>Nhập lại mật khẩu</label>
+                    </div>
+                </div>      
+            </div>
+            <div class='row'>
+                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                    <div class='my-3 px-3' id='forget-password-notification'>
+
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                    <div class='form-label-group'>
+                        <button class='btn btn-lg btn-primary btn-block text-uppercase' type='submit'><span><i class='fas fa-search' aria-hidden='true'></i></span> Hoàn Tất</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <a class='btn-additional btn btn-lg btn-google btn-block text-uppercase' href='login.php'><span><i class='fas fa-sign-in-alt'></i></span> Đăng Nhập</a>
+        <a class='btn-additional btn btn-lg btn-success btn-block text-uppercase' href='../../index.php'><span><i class='fas fa-arrow-left'></i></span> Trở về trang chủ</a>
+    </div> 
+        "
+    ;
+}
+function hashPassword($password){
+    return password_hash($password, PASSWORD_DEFAULT);
+}
 function root()
 {
     return "http://localhost/project-shopping-website/";
@@ -154,29 +304,4 @@ function sendEmail($to, $subject, $content)
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-}
-function createFormVerifyOTP($email){
-    return 
-    "
-    <h5 class='card-title text-center text-success font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Xác Thực Tài Khoản</h5>
-    <hr>
-    <form class='form-signin' action='' method='post' id='register-form-verify-otp'>
-        <div class='form-label-group'>
-            <h6 class='card-title text-center text-primary font-weight-bold'> 
-                Chúng tôi đã gửi 1 mã xác thực tới {$email}
-            </h6>
-        </div>
-        <hr>
-        <div class='form-label-group'>
-            <input type='text' id='otp' name='otp' class='form-control text-center' placeholder='OTP' required autofocus>
-            <label for='otp'>OTP</label>
-        </div>
-        <div class='my-3 px-3' id='register-notification'>
-        
-        </div>
-        <div class='form-label-group'>
-            <button class='btn btn-lg btn-primary btn-block text-uppercase' type='submit'><span><i class='fas fa-envelope'></i></span> Xác thực</button>
-        </div>
-    </form>
-    ";
 }

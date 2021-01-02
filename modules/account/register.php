@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-9 mx-auto">
-                <div class="card card-signin flex-row my-5">
+                <div class="card card-signin flex-row my-5" id="register-content">
                     <div class="card-img-left d-none d-md-flex">
                     </div>
                     <div class="card-body" id="register-body">
@@ -29,9 +29,7 @@
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Địa chỉ email.." required>
                                 <label for="email">Địa Chỉ Email</label>
                             </div>
-
                             <hr>
-
                             <div class="form-label-group">
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                                 <label for="password">Mật Khẩu</label>
@@ -56,6 +54,31 @@
             </div>
         </div>
     </div>
+    <!-- Central Modal Medium -->
+    <div class="modal fade" id="register-notification-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel">Thông Báo</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <p class="h3 text-success text-center font-weight-bold"><i class="fas fa-envelope"></i> Đăng ký thành công</p>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!-- Central Modal Medium -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/dcb76ae865.js" crossorigin="anonymous"></script>

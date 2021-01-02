@@ -3,6 +3,7 @@ require_once __DIR__ . "/function.php";
 class Database
 {
     public $connection = null;
+
     public function __construct($server, $db, $username, $password)
     {
         $this->connection = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $username, $password);
@@ -50,31 +51,43 @@ class Database
         $query = $this->connection->prepare($sqlStr);
         return $query->execute();
     }
-    public function findAccountByUsername($name){
+    public function findAccountByUsername($name)
+    {
         $sql = "SELECT * FROM `tbl_account` WHERE username = ?";
         $query = $this->connection->prepare($sql);
         $query->execute(array($name));
-        return $query->fetchAll();
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
-    public function findAccountByEmail($email){
+    public function findAccountByEmail($email)
+    {
         $sql = "SELECT * FROM `tbl_account` WHERE `email` = ?";
         $query = $this->connection->prepare($sql);
         $query->execute(array($email));
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    public function findOTPByUsername($name){
+    public function findOTPByUsername($name)
+    {
         $sql = "SELECT * FROM `tbl_account_otp` WHERE `username` = ?";
         $query = $this->connection->prepare($sql);
         $query->execute(array($name));
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    public function executeNonQuery($sql){
+    public function executeNonQuery($sql)
+    {
         $query =  $this->connection->prepare($sql);
         return $query->execute();
     }
-    public function executeQuery($sql){
-        $query = $this->connection ->prepare($sql);
+    public function executeQuery($sql)
+    {
+        $query = $this->connection->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+    public function getCurrentUser()
+    {
+        if (isset($_SESSION['username'])) {
+            return $this->findAccountByUsername($_SESSION["username"]);
+        }
+        return null;
     }
 }
