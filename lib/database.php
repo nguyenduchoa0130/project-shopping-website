@@ -37,7 +37,8 @@ class Database
     {
         $sqlStr = createInsertSql($table, $data);
         $query = $this->connection->prepare($sqlStr);
-        return $query->execute();
+        $query->execute();
+        return $this->connection->lastInsertId();
     }
     public function update($table, $id_name, $val, $data)
     {
