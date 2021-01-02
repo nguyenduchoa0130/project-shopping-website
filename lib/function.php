@@ -305,3 +305,14 @@ function sendEmail($to, $subject, $content)
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
+function convertImageToBase64($name_input){
+    if (getimagesize($_FILES["{$name_input}"]["tmp_name"])) {
+        $img = addslashes($_FILES["{$name_input}"]["tmp_name"]);
+        $name = addslashes($_FILES["{$name_input}"]["name"]);
+        $img = file_get_contents($img);
+        $img = base64_encode($img);
+        return array("name" => $name, "image" => $img);
+    }else{
+        return null;
+    }
+}
