@@ -7,11 +7,11 @@ require_once __DIR__ . "/../../layouts/header.php";
 <!-- TODO Nội dung trang -->
 <div class="container-fluid">
     <?php
-    if (!empty($_GET["id_category"]) && !empty($_GET["name"])) {
-        $id = $_GET["id_category"];
-        $name = $_GET["name"];
-        $sql = "SELECT * FROM tbl_product WHERE id_category = {$id}";
-        $data = $database->fetchSql($sql);
+if (!empty($_GET["id_category"]) && !empty($_GET["name"])) {
+    $id = $_GET["id_category"];
+    $name = $_GET["name"];
+    $sql = "SELECT * FROM tbl_product WHERE id_category = {$id}";
+    $data = $database->fetchSql($sql);
     ?>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -40,11 +40,11 @@ require_once __DIR__ . "/../../layouts/header.php";
             </thead>
             <tbody>
             <?php
-            $count = 1;
-            if ($data) {
-                foreach ($data as $product) {
-                    $item = new Product($product);
-                    echo "
+$count = 1;
+    if ($data) {
+        foreach ($data as $product) {
+            $item = new Product($product);
+            echo "
                         <tr class='text-center text-dark h5'>
                             <th scope='row'>{$count}</th>
                             <td>{$item->get_NameProduct()}</td>
@@ -58,23 +58,23 @@ require_once __DIR__ . "/../../layouts/header.php";
                             </td>
                         </tr>
                         ";
-                    $count++;
-                }
-            } else {
-                echo "
+            $count++;
+        }
+    } else {
+        echo "
                         <div class='alert alert-success' role='alert'>
                             Không có sản phẩm nào !
                         </div>
                     ";
-            }
-        } else {
-            echo "
+    }
+} else {
+    echo "
                     <div class='alert alert-warning' role='alert'>
                         Không Tải Được Dữ Liệu
                     </div>
                 ";
-        }
-            ?>
+}
+?>
             </tbody>
         </table>
         <!-- Content Row Thêm Sản Phẩm-->
@@ -123,11 +123,17 @@ require_once __DIR__ . "/../../layouts/header.php";
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <div class="alert alert-primary" role="alert">
-                                        This is a primary alert—check it out!
+                                    <div class="form-group">
+                                        <label for="image1">Hình Ảnh 1</label>
+                                        <input class="form-control border-0 upload-image" id="image1" name="image1" type="file" accept="image/*">
                                     </div>
-                                    <div class="alert alert-primary" role="alert">
-                                        This is a primary alert—check it out!
+                                    <div class="form-group">
+                                        <label for="image2">Hình Ảnh 2</label>
+                                        <input class="form-control border-0 upload-image" id="image2" name="image2" type="file" accept="image/*">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image3">Hình Ảnh 3</label>
+                                        <input class="form-control border-0 upload-image" id="image3" name="image3" type="file" accept="image/*">
                                     </div>
                                 </div>
                             </div>
