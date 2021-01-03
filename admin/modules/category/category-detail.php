@@ -1,6 +1,29 @@
 <?php
     require_once __DIR__ . "/../../../autoload/autoload.php";
     require_once __DIR__ . "/../../layouts/header.php";
+    echo "
+        <script>
+            alert({$_SESSION['notificaiton']});
+        </script>
+        ";
+    if(isset($_SESSION["notification"])){
+        if($_SESSION["notification"] == 1){
+            $message = "<p class='h3 text-success text-center font-weight-bold'><i class='fas fa-envelope'></i> Thêm sản phẩm thành công</p>";
+        }
+        else {
+            $message = "<p class='h3 text-danger text-center font-weight-bold'><i class='fas fa-envelope'></i> Thêm sản phẩm thất bại</p>";
+        }
+        echo "
+        <script>
+        $('#showNotification').modal('show');
+        $('#content-notifation').html({$message});
+        setTimeout(()=>{
+            $('#showNotification').modal('hide');
+        }, 1000)
+        </script>
+        ";
+        unset($_SESSION["notification"]);
+    }
 ?>
 <!-- TODO Nội dung trang -->
 <div class="container-fluid">
@@ -13,7 +36,7 @@
     ?>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="javascript:history.back()">
+            <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="<?php echo ROOT."/admin/modules/category/index.php";?>">
                 <span><i class="fas fa-shopping-bag"></i></span>
                 Quản Lý Sản Phẩm | <span class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none"> <?php echo $name ?></span>
             </a>
@@ -81,7 +104,7 @@
                 <!--Content-->
                 <div class="modal-content">
                     <!--Header-->
-                    <div class="modal-header text-center  bg-primary text-light">
+                    <div class="modal-header text-center bg-primary text-light">
                         <h4 class="font-weight-bold modal-title w-100" id="myModalLabel">Thêm Sản Phẩm</h4>
                         <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -91,7 +114,7 @@
                     <div class="modal-body p-3">
                         <form action="/project-shopping-website/admin/modules/product/add-product.php" method="post" id="formAddProduct" enctype="multipart/form-data" accept-charset="utf-8">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                                     <div class="form-group">
                                         <label for="name_product">Tên Sản Phẩm</label>
                                         <input class="form-control" id="name_product" name="name_product" type="text" placeholder="Tên Sản Phẩm" required>
@@ -103,6 +126,7 @@
                                     <div class="form-group">
                                         <label for="quantity">Số Lượng</label>
                                         <input class="form-control" id="quantity" name="quantity" type="number" placeholder="Số Lượng" required>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="produced_at">Nơi Sản Xuất</label>
@@ -119,17 +143,31 @@
                                         <label for="category">Mục</label>
                                         <input class="form-control" id="category" name="category" type="text" value="<?php echo $name ?>" readonly>
                                     </div>
-                                    <div class="form-group border-0">
-                                        <label for="image1" class="form-label">Hình ảnh sản phẩm</label>
-                                        <input class="form-control" type="file" id="image1" name="image1">
-                                    </div>
-                                    <div class="form-group border-0">
-                                        <label for="image2" class="form-label">Hình ảnh sản phẩm</label>
-                                        <input class="form-control" type="file" id="image2" name="image2">
-                                    </div>
-                                    <div class="form-group border-0">
-                                        <label for="image3" class="form-label">Hình ảnh sản phẩm</label>
-                                        <input class="form-control" type="file" id="image3" name="image3">
+                                </div>
+
+                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                    <div class="container-fluid">
+                                        <div class="form-group">
+                                            <label for="image1">Thêm hình ảnh</label>
+                                            <input type="file" class="form-control-file text-wrap" id="image1" name="image1" accept="image/*">
+                                            <div class="container-fluid image-preview">
+                                                <img>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image2">Thêm hình ảnh</label>
+                                            <input type="file" class="form-control-file text-wrap" id="image2" name="image2" accept="image/*">
+                                            <div class="container-fluid image-preview">
+                                                <img>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image3">Thêm hình ảnh</label>
+                                            <input type="file" class="form-control-file text-wrap" id="image3" name="image3" accept="image/*">
+                                            <div class="container-fluid image-preview">
+                                                <img>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +197,7 @@
                         </button>
                     </div>
                     <!--Body-->
-                    <div class="modal-body content-notifation">
+                    <div class="modal-body" id="content-notifation">
 
                     </div>
                     <!--Footer-->

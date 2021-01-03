@@ -30,7 +30,7 @@ $currentUser = $database->getCurrentUser();
                 </li>
                 <?php if ($currentUser["role"] == "0") : ?>
                     <li class="nav-item ml-3">
-                        <a class="nav-link h5 text-white" href="/project-shopping-website/modules/account/admin/index.php"><span class="mr-3"><i class="fas fa-tools"></i></span> Admin</a>
+                        <a class="nav-link h5 text-white" href="<?php echo ROOT."/admin/index.php"; ?>"><span class="mr-3"><i class="fas fa-tools"></i></span> Admin</a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item ml-3">

@@ -7,10 +7,10 @@ if ($_POST["id_category"]) {
         if ($products != null) {
             foreach ($products as $product) {
                 $item = new Product($product);
-                if($database->fetchDataById("tbl_product_img", "id_product", $item->get_IdProduct())){
-                    $database->delete("tbl_product_img", "id_product", $item->get_IdProduct());
+                if($database->fetchDataById("tbl_image_product", "id_product", $item->get_IdProduct())){
+                    $database->delete("tbl_image_product", "id_product", $item->get_IdProduct());
                 }        
-                $database->delete("tbl_product", "id_product", $item->get_IdProduct());
+                $database->delete("tbl_product", "id_product", $item->get_IdProduct()); 
             }
         }
         $database->delete("tbl_category", "id_category", $id_category);

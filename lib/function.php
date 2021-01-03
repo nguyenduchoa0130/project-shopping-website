@@ -20,7 +20,7 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
     $head = "
         <form action='' method='post' id='formUpdateProduct' accept-charset='utf-8'>
             <div class='row'>
-                <div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+                <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>
                     <div class='form-group d-none'>
                         <input class='form-control' id='id_product' name='id_product' type='text' value='{$product->get_IdProduct()}' readonly>
                     </div>
@@ -48,38 +48,51 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
                         <input class='form-control' id='id_category' name='id_category' type='text' value='{$id_category}' readonly>
                     </div>
                     <div class='form-group'>
+                        <label for='category'>Mục</label>
                         <input class='form-control' id='category' name='category' type='text' value='{$name_category}' readonly>
                     </div>
                 </div>
-                ";
-    $middle_start = "
-        <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
-        ";
-    if ($imgs) {
-        foreach ($imgs as $img) {
-            $middle_start .= "
-                            <div class='card mb-3' style='width: 80%;'>
-                                <img class='card-img-top' src='{$img->get_Link()}' alt='Hình Ảnh Sản Phẩm'>
+                <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5'>
+                    <div class='container-fluid'>
+                        <div class='form-group'>
+                            <label for='image1'>Cập nhật hình ảnh</label>
+                            <input type='file' class='form-control-file text-wrap' id='image1' name='image1' accept='image/*'>
+                            <div class='container-fluid image-preview'>
+                                <img>
                             </div>
-                            ";
-        }
-    }
-    $middel_end = "
-                 </div>
+                        </div>
+                        <div class='form-group'>
+                            <label for='image2'>Cập nhật hình ảnh</label>
+                            <input type='file' class='form-control-file text-wrap' id='image2' name='image2' accept='image/*'>
+                            <div class='container-fluid image-preview'>
+                                <img>
+                            </div>
+                        </div>
+                        <div class='form-group'>
+                            <label for='image3'>Cập nhật hình ảnh</label>
+                            <input type='file' class='form-control-file text-wrap' id='image3' name='image3' accept='image/*'>
+                            <div class='container-fluid image-preview'>
+                                <img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-    ";
+            
+                ";
     $foot = "
+            
             <div class='row'>
                 <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                     <div class='modal-footer'>
                         <button type='submit' class='btn btn-success m-auto  waves-effect waves-light'>Cập Nhật</button>
-                        <button type='button' class='btn btn-danger m-auto waves-effect waves-light' data-toggle='modal' data-target='#verifyDelete'>Xóa</button>
+                        <button type='button' class='btn btn-danger m-auto waves-effect waves-light' data-toggle='modal' data-target='#product-verifyDelete'>Xóa</button>
                     </div>
                 </div>
             </div>
         </form>
                 ";
-    return $head . $middle_start . $middel_end . $foot;
+    return $head.$foot;
 }
 function createFormVerifyOTP($username, $email)
 {

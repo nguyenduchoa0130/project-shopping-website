@@ -4,8 +4,7 @@ $(document).ready(function () {
     let values = $("#formAddCategory").serialize();
     $.ajax({
       type: "post",
-      url:
-        "/project-shopping-website/admin/modules/category/add-category.php",
+      url: "/project-shopping-website/admin/modules/category/add-category.php",
       contentType: "application/x-www-form-urlencoded;charset=UTF-8",
       data: { values },
       success: function (data) {
@@ -58,24 +57,11 @@ $(document).ready(function () {
       });
     });
   });
-  $("#formAddProduct").on("submit", function (event) {
-    event.preventDefault();
-    let values = $("#formAddProduct").serialize();
-    $.ajax({
-      type: "post",
-      url:
-        "/project-shopping-website/admin/modules/product/add-product.php",
-      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-      data: { values },
-      success: function (data) {
-        $("#showNotification").modal("show");
-        $(".content-notifation").html(data);
-        setTimeout(function () {
-          $("#showNotification").modal("hide");
-          $("#addCategory").modal("hide");
-          location.reload();
-        }, 1000);
-      },
-    });
+  $("input[type=file]").on("change", function (event) {
+    let src = URL.createObjectURL(event.target.files[0]);
+    $(this)
+      .next()
+      .children()
+      .attr({ src: src, class: "w-100 h-25 py-2", alt: "Hình ảnh sản phẩm" });
   });
 });

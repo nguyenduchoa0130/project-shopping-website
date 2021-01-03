@@ -1,15 +1,9 @@
 <?php
     require_once __DIR__ . "/../../../autoload/autoload.php";
-    if ($_POST["id_product"]) {
-        $id_product = $_POST["id_product"];
+    if ($_POST["id"]) {
+        $id_product = $_POST["id"];
         try {
-            $imgs = $database->fetchDataById("tbl_product_img", "id_product", $id_product);
-            if ($imgs != null) {
-                foreach ($imgs as $img) {
-                    $item = new ImageProduct($img);     
-                    $database->delete("tbl_product_img", "id_product", $item->get_IdProduct());
-                }
-            }
+            $database->delete("tbl_image_product", "id_product", $id_product);
             $database->delete("tbl_product", "id_product", $id_product);
             echo "<h4 class='modal-title w-100 text-success' id='myModalLabel'>Xóa Danh Mục Thành Công</h4>";
         } catch (PDOException $e) {

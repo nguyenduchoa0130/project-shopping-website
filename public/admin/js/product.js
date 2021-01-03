@@ -9,18 +9,37 @@ $(document).ready(function () {
     let values = $("#formUpdateProduct").serialize();
     $.ajax({
       type: "post",
-      url:
-        "/project-shopping-website/admin/modules/product/update-product.php",
+      url: "/project-shopping-website/admin/modules/product/update-product.php",
       contentType: "application/x-www-form-urlencoded;charset=UTF-8",
       data: { values },
       success: function (data) {
+        $("#product-notification").modal("show");
+        $(".product-notifi-content").html(data);
+        setTimeout(() => {
+          $("#product-notification").modal("hide");
+          location.reload();
+        }, 1000);
+      },
+    });
+  });
+
+  $("#product-verifyDelete").on("shown.bs.modal", function (e) {
+    $("#btn-delete-product").on("click", function (e) {
+      let id = $(this).data("id").toString();
+      $.ajax({
+        type: "post",
+        url:
+          "/project-shopping-website/admin/modules/product/remove-product.php",
+        data: { id },
+        success: function (data) {
+          $("#product-notification-content").html(data);
           $("#product-notification").modal("show");
-          $(".product-notifi-content").html(data);
-          setTimeout(()=>{
+          setTimeout(() => {
             $("#product-notification").modal("hide");
-            location.reload();  
+            window.history.back();
           }, 1000);
-      }
+        },
+      });
     });
   });
 });

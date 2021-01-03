@@ -9,6 +9,10 @@
     require_once __DIR__. "/../lib/account.php";
     require_once __DIR__. "/../lib/notification.php";
     require_once __DIR__. "/../public/user/vendor/autoload.php";
+    define("ROOT", "/project-shopping-website");
     session_start();
     $database = new Database("localhost", "db_shopping", "root", "");
+    /**
+     * @param 1: Thành công, 0: Lỗi
+     */
 ?>

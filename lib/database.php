@@ -44,7 +44,8 @@ class Database
     {
         $sqlStr = createUpdateSql($table, $id_name, $val, $data);
         $query = $this->connection->prepare($sqlStr);
-        return $query->execute();
+        $query->execute();
+        return $this->connection->lastInsertId();
     }
     public function delete($table, $id_name, $val)
     {
