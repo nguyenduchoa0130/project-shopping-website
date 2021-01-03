@@ -84,20 +84,20 @@ CREATE TABLE IF NOT EXISTS tbl_category (
 -- Cấu trúc bảng cho bảng `tbl_product`
 --
 
-DROP TABLE IF EXISTS `tbl_product`;
-CREATE TABLE IF NOT EXISTS `tbl_product` (
-  `id_product` int(11) NOT NULL AUTO_INCREMENT,
-  `name_product` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `price` decimal(10,0) NOT NULL DEFAULT '0',
-  `quantity` int(11) NOT NULL DEFAULT '1',
-  `produced_at` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `id_category` int(11) DEFAULT NULL,
-  `likes` int(255) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_product`),
-  KEY `FK_PRODUCT_CATEGORY` (`id_category`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
+DROP TABLE IF EXISTS tbl_product;
+CREATE TABLE IF NOT EXISTS tbl_product (
+  id_product int(11) NOT NULL AUTO_INCREMENT,
+  name_product varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  price decimal(10,0) NOT NULL DEFAULT '0',
+  status tinyint(1) NOT NULL DEFAULT '1',
+  number_liked int(11) NOT NULL DEFAULT '0',
+  quantity int(11) NOT NULL DEFAULT '0',
+  produced_at varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  description text COLLATE utf8_unicode_ci,
+  id_category int(11) DEFAULT NULL,
+  PRIMARY KEY (id_product),
+  KEY FK_PRODUCT_CATEGORY (id_category)
+) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 --
 -- Đang đổ dữ liệu cho bảng `tbl_product`
 --
