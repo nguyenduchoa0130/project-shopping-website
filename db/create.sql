@@ -111,15 +111,15 @@ CREATE TABLE IF NOT EXISTS tbl_product (
 --
 
 
-
 DROP TABLE IF EXISTS tbl_image_product;
 CREATE TABLE IF NOT EXISTS tbl_image_product (
   id_img int(11) NOT NULL AUTO_INCREMENT,
   name varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   image longblob,
+  number_order int(11) DEFAULT NULL,
   id_product int(11) DEFAULT NULL,
   PRIMARY KEY (id_img)
-) ENGINE=MyISAM AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_product_img`
