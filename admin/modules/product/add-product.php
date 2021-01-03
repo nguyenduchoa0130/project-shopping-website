@@ -15,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $database->insert("tbl_product", $props);
         $imgs = array();
         for ($i = 1; $i < 4; $i++) {
-            if(!empty($_POST["image".$i])){
+            if(!empty($_FILES["image".$i]["name"])){
                 $img = convertImageToBase64("image" . $i);
                 if ($img) {
                     array_push($imgs, ["name" => $img["name"], "image" => $img["image"], "id_product" => $id]);
                 }
-            }   
+            }
         }
-        foreach($imgs as $img){
+        foreach ($imgs as $img) {
             $database->insert("tbl_image_product", $img);
         }
         $_SESSION["notification"] = 1;

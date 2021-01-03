@@ -1,29 +1,6 @@
 <?php
-    require_once __DIR__ . "/../../../autoload/autoload.php";
-    require_once __DIR__ . "/../../layouts/header.php";
-    echo "
-        <script>
-            alert({$_SESSION['notificaiton']});
-        </script>
-        ";
-    if(isset($_SESSION["notification"])){
-        if($_SESSION["notification"] == 1){
-            $message = "<p class='h3 text-success text-center font-weight-bold'><i class='fas fa-envelope'></i> Thêm sản phẩm thành công</p>";
-        }
-        else {
-            $message = "<p class='h3 text-danger text-center font-weight-bold'><i class='fas fa-envelope'></i> Thêm sản phẩm thất bại</p>";
-        }
-        echo "
-        <script>
-        $('#showNotification').modal('show');
-        $('#content-notifation').html({$message});
-        setTimeout(()=>{
-            $('#showNotification').modal('hide');
-        }, 1000)
-        </script>
-        ";
-        unset($_SESSION["notification"]);
-    }
+require_once __DIR__ . "/../../../autoload/autoload.php";
+require_once __DIR__ . "/../../layouts/header.php";
 ?>
 <!-- TODO Nội dung trang -->
 <div class="container-fluid">
@@ -36,7 +13,7 @@
     ?>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="<?php echo ROOT."/admin/modules/category/index.php";?>">
+            <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="<?php echo ROOT . "/admin/modules/category/index.php"; ?>">
                 <span><i class="fas fa-shopping-bag"></i></span>
                 Quản Lý Sản Phẩm | <span class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none"> <?php echo $name ?></span>
             </a>
@@ -198,7 +175,23 @@
                     </div>
                     <!--Body-->
                     <div class="modal-body" id="content-notifation">
-
+                        <?php if (isset($_SESSION["notification"])) : ?>
+                            <?php if ($_SESSION["notification"] == 1) : ?>
+                                <p class="h3 text-success text-center font-weight-bold">
+                                    <span>
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    Thêm thành công
+                                </p>
+                            <?php else : ?>
+                                <p class="h3 text-success text-center font-weight-bold">
+                                    <span>
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    Thêm thất bại
+                                </p>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                     <!--Footer-->
                     <div class="modal-footer">
@@ -213,4 +206,20 @@
 <!-- TODO Nội dung trang -->
 <?php
 require_once __DIR__ . "/../../layouts/footer.php";
+if (isset($_SESSION["notification"])) {
+    if ($_SESSION["notification"] == 1) {
+        echo
+            "
+            <script type='text/javascript'>
+                $(document).ready(function(){
+                    $('#showNotification').modal('show');
+                    setTimeout(()=>{
+                        $('#showNotification').modal('hide');
+                    }, 1000)
+                });
+             </script>
+             ";
+        unset($_SESSION["notification"]);
+    }
+}
 ?>
