@@ -13,3 +13,4 @@ require_once __DIR__ . "/../../../autoload/autoload.php";
     }else{
         echo "Có lỗi đã xảy ra !!!";
     }
+?>

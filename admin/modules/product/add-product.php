@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(!empty($_FILES["image".$i]["name"])){
                 $img = convertImageToBase64("image" . $i);
                 if ($img) {
-                    array_push($imgs, ["name" => $img["name"], "image" => $img["image"], "id_product" => $id]);
+                    array_push($imgs, ["name" => $img["name"], "image" => $img["image"],"number_order" => $i, "id_product" => $id]);
                 }
             }
         }
@@ -26,8 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $database->insert("tbl_image_product", $img);
         }
         $_SESSION["notification"] = 1;
-        header("Refresh:0; url=../category/category-detail?id_category={$id_category}&name={$name_category}");
+        header("Refresh:0; url=../category/category-detail.php?id_category={$id_category}&name={$name_category}");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
+?>

@@ -18,7 +18,7 @@ function handleDataForm($data)
 function createFormProductDetail($id_category, $name_category, $product, $imgs)
 {
     $head = "
-        <form action='' method='post' id='formUpdateProduct' accept-charset='utf-8'>
+        <form action='/project-shopping-website/admin/modules/product/update-product.php' method='post' id='formUpdateProduct' accept-charset='utf-8'>
             <div class='row'>
                 <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>
                     <div class='form-group d-none'>
@@ -328,4 +328,13 @@ function convertImageToBase64($name_input){
     }else{
         return null;
     }
+}
+function isExistsImage(array $data_img, $number_order){
+    foreach($data_img as $data){
+        $img = new ImageProduct($data);
+        if($img->number_order == $number_order){
+            return $img;
+        }
+    }
+    return null;
 }
