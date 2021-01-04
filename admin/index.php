@@ -13,20 +13,6 @@
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
 
-    <!-- Content Row -->
-    <div class="row">
-    </div>
-
-    <!-- Content Row -->
-
-    <div class="row">
-
-    </div>
-
-    <!-- Content Row -->
-    <div class="row">
-    </div>
-
 </div>
 <!-- TODO Nội dung trang -->
 <?php require_once('./layouts/footer.php') ?>

@@ -1,8 +1,10 @@
 <?php
 require_once __DIR__ . "/../autoload/autoload.php";
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 function handleDataForm($data)
 {
     $props = array();
@@ -92,12 +94,12 @@ function createFormProductDetail($id_category, $name_category, $product, $imgs)
             </div>
         </form>
                 ";
-    return $head.$foot;
+    return $head . $foot;
 }
 function createFormVerifyOTP($username, $email)
 {
-    return 
-    "
+    return
+        "
     <h5 class='card-title text-center text-success font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Xác Thực Tài Khoản</h5>
     <hr>
     <form class='form-signin' action='' method='post' id='register-form-verify-otp'>
@@ -124,8 +126,8 @@ function createFormVerifyOTP($username, $email)
 }
 function createFormVerifyProfileUser(array $account)
 {
-    return 
-    "
+    return
+        "
     <div class='card-body'>
         <h5 class='card-title text-center text-primary font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Thông Tin Tài Khoản</h5>
         <hr class='my-4'>
@@ -195,12 +197,12 @@ function createFormVerifyProfileUser(array $account)
         <a class='btn-additional btn btn-lg btn-google btn-block text-uppercase' href='login.php'><span><i class='fas fa-sign-in-alt'></i></span> Đăng Nhập</a>
         <a class='btn-additional btn btn-lg btn-success btn-block text-uppercase' href='../../index.php'><span><i class='fas fa-arrow-left'></i></span> Trở về trang chủ</a>
     </div> 
-        "
-    ;
+        ";
 }
-function createFormForgetPassword($username){
-    return 
-    "
+function createFormForgetPassword($username)
+{
+    return
+        "
     <div class='card-body' id='forget-password-content'>
         <h5 class='card-title text-center text-primary font-weight-bold'><span><i class='fas fa-user-plus'></i></span> Mật Khẩu Mới</h5>
         <hr class='my-4'>
@@ -238,10 +240,10 @@ function createFormForgetPassword($username){
         <a class='btn-additional btn btn-lg btn-google btn-block text-uppercase' href='login.php'><span><i class='fas fa-sign-in-alt'></i></span> Đăng Nhập</a>
         <a class='btn-additional btn btn-lg btn-success btn-block text-uppercase' href='../../index.php'><span><i class='fas fa-arrow-left'></i></span> Trở về trang chủ</a>
     </div> 
-        "
-    ;
+        ";
 }
-function hashPassword($password){
+function hashPassword($password)
+{
     return password_hash($password, PASSWORD_DEFAULT);
 }
 function root()
@@ -318,23 +320,102 @@ function sendEmail($to, $subject, $content)
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
-function convertImageToBase64($name_input){
+function convertImageToBase64($name_input)
+{
     if (getimagesize($_FILES["{$name_input}"]["tmp_name"])) {
         $img = addslashes($_FILES["{$name_input}"]["tmp_name"]);
         $name = addslashes($_FILES["{$name_input}"]["name"]);
         $img = file_get_contents($img);
         $img = base64_encode($img);
         return array("name" => $name, "image" => $img);
-    }else{
+    } else {
         return null;
     }
 }
-function isExistsImage(array $data_img, $number_order){
-    foreach($data_img as $data){
+function isExistsImage(array $data_img, $number_order)
+{
+    foreach ($data_img as $data) {
         $img = new ImageProduct($data);
-        if($img->number_order == $number_order){
+        if ($img->number_order == $number_order) {
             return $img;
         }
     }
     return null;
+}
+function createCardProduct($product, $img)
+{
+    $img = resizeImage($img, 200, 200);
+    $header = 
+    "
+    <div class='card shadow-sm border-light mb-4 mx-2'>
+    <a href='#' class='position-relative d-block m-auto'>
+        <img src='data:image;base64, {$img['image']}' alt='image'>
+    </a>
+    <div class='card-body'>
+        <a href='#'>
+            <h5 class='font-weight-normal'>{$product->name_product}</h5>
+        </a>
+        <div class='post-meta'>
+            <span class='small lh-120'><i class='fas fa-map-marker-alt mr-2'></i>Sản xuất tại: {$product->produced_at}</span>
+        </div>
+        <div class='d-flex my-4'>
+    ";
+    $star = $product->number_liked/10;
+    $middle = "";
+    for($i = 0; $i < $star; $i++){
+        $middle .= " <i class='star fas fa-star text-warning'></i>";
+    }
+    for($i = 0; $i < (5- $star); $i++){
+        $middle .= " <i class='star fas fa-star text-muted'></i>";
+    }
+    $footer = "
+    <span class='badge badge-pill badge-success ml-2'>{$product->number_liked}</span>
+        </div>
+        <div class='d-flex justify-content-between text-wrap'>
+            <div class='col pl-0 text-center' style='border-right: 2px solid #E9EDDC;'>
+                <span class='text-success h3 d-block mb-2'>
+                    <i class='fas fa-money-bill-wave'></i>
+                </span>
+                <span class='h5 text-success font-weight-bold text-wrap'>{$product->price}</span>
+            </div>
+            <div class='col text-center' style='border-right: 2px solid #E9EDDC; color: red;'>
+                <span class='h3 d-block mb-2'>
+                    <i class='fas fa-heart'></i></i>
+                </span>
+                <span class='h5 font-weight-bold' style='color:red;'>{$product->number_liked}</span>
+            </div>
+            <div class='col pr-0 text-center'>
+                <span class='text-info h3 d-block mb-2'>
+                    <i class='fas fa-boxes'></i>
+                </span>
+                <span class='h5 font-weight-bold'>0</span>
+            </div>
+        </div>
+    </div>
+</div> 
+    ";
+    return $header.$middle.$footer;
+}
+function resizeImage($img, $new_width, $new_height)
+{
+    $WIDTH = $new_width;
+    $HEIGHT = $new_height;
+    $theme_image_little = imagecreatefromstring(base64_decode($img["image"]));
+    $image_little = imagecreatetruecolor($WIDTH, $HEIGHT);
+    $size = getimagesizefromstring(base64_decode($img["image"]));
+    $org_w = $size[0];
+    $org_h = $size[1];
+    // $org_w and org_h depends of your image, in your case, i guess 800 and 600
+    imagecopyresampled($image_little, $theme_image_little, 0, 0, 0, 0, $WIDTH, $HEIGHT, $org_w, $org_h);
+
+    // Thanks to Michael Robinson
+    // start buffering
+    ob_start();
+    imagepng($image_little);
+    $contents =  ob_get_contents();
+    ob_end_clean();
+
+    $theme_image_enc_little = base64_encode($contents);
+    $img["image"] = $theme_image_enc_little;
+    return $img;
 }

@@ -1,13 +1,14 @@
 <?php
 class Product{
-    private $id_product;
-    private $name_product;
-    private $price = 0;
-    private $quantity = 0;
-    private $status = true;
-    private $produced_at;
-    private $description;
-    private $id_category;
+    public $id_product;
+    public $name_product;
+    public $price = 0;
+    public $quantity = 0;
+    public $status = true;
+    public $number_liked = 0;
+    public $produced_at;
+    public $description;
+    public $id_category;    
     public function __construct(array $props)
     {
        $this->id_product = $props["id_product"];
@@ -15,7 +16,8 @@ class Product{
        $this->price = $props["price"];
        $this->quantity = $props["quantity"];
        $this->status = $props["status"];
-       $this->produced_at = $props["produced_at"];
+       $this->number_liked = $props["number_liked"];
+       $this->produced_at = $props["produced_at"];  
        $this->description = $props["description"];
        $this->id_category = $props["id_category"];
     }

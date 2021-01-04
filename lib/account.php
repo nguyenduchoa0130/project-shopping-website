@@ -1,20 +1,28 @@
 <?php
 class Account
 {
+    public $id_user;
     public $username;
     public $password;
     public $email;
+    public $fullname;
+    public $gender;
     public $birth;
     public $phone;
     public $address;
-    public function __construct($username, $password, $email, $birth, $phone, $address)
+    public $role;
+    public function __construct(array $prop)
     {
-        $this->username = $username;
-        $this->password = $password;
-        $this->email = $email;
-        $this->birth = $birth;
-        $this->phone = $phone;
-        $this->address = $address;
+        $this->id_user = $prop["id_user"];
+        $this->username = $prop["username"];
+        $this->password = $prop["password"];
+        $this->email = $prop["email"];
+        $this->fullname = $prop["fullname"];
+        $this->gender = $prop["gender"];
+        $this->birth = $prop["birth"];
+        $this->phone = $prop["phone"];
+        $this->address = $prop["address"];
+        $this->role = $prop["role"];
     }
     /**
      * @return mixed

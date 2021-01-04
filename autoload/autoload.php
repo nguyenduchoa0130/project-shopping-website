@@ -11,7 +11,7 @@
     require_once __DIR__. "/../public/user/vendor/autoload.php";
     define("ROOT", "/project-shopping-website");
     session_start();
-    $database = new Database("localhost", "db_shopping", "root", "");
+    $database = new Database("localhost", "happyshopping", "root", "");
     /**
      * @param 1: Thành công, 0: Lỗi
      */
