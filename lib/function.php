@@ -342,17 +342,32 @@ function isExistsImage(array $data_img, $number_order)
     }
     return null;
 }
+function createStarRating($star){
+    $str = "";
+    for($i = 0; $i < $star; $i++){
+        $str .= "<span class='h3 m-0'><i class='fa-star text-waring'></i></span>";
+    }
+    for($i = 0; $i < (5-$star); $i++){
+        $str .= "<span class='h3 m-0'><i class='fa-star text-muted'></i></span>";
+    }
+    return $str;
+}
+function createSrcImage($strBase64){
+    return "data:image;base64, {$strBase64}";
+}
 function createCardProduct($product, $img)
 {
     $img = resizeImage($img, 200, 200);
+    $url = ROOT."/modules/product/index.php?id_product={$product->id_product}";
+    $src = createSrcImage($img['image']);
     $header = 
     "
     <div class='card shadow-sm border-light mb-4 mx-2'>
-    <a href='#' class='position-relative d-block m-auto'>
-        <img src='data:image;base64, {$img['image']}' alt='image'>
+    <a href='{$url}' class='position-relative d-block m-auto'>
+        <img src='{$src}' alt='image'>
     </a>
     <div class='card-body'>
-        <a href='#'>
+        <a href='{$url}'>
             <h5 class='font-weight-normal'>{$product->name_product}</h5>
         </a>
         <div class='post-meta'>

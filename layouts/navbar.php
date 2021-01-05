@@ -4,7 +4,7 @@ $currentUser = $database->getCurrentUser();
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary">
-    <a class="navbar-brand text-white h5" href="./index.php"><span class="mr-3"><i class="fas fa-home"></i></span>Trang Chủ</a>
+    <a class="navbar-brand text-white h5" href="<?php echo ROOT."/index.php"; ?>"><span class="mr-3"><i class="fas fa-home"></i></span>Trang Chủ</a>
     <button class="navbar-toggler text-white font-weight-bold" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         ☰
     </button>

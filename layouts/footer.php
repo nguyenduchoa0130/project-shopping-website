@@ -88,8 +88,9 @@ require_once __DIR__ . "/../autoload/autoload.php";
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/dcb76ae865.js" crossorigin="anonymous"></script>
-<script src="public/user/js/slideshow.js"></script>
-<script src="public/user/js/app.js"></script>
+<script src="<?php echo ROOT. "/public/user/js/slideshow.js"; ?>"></script>
+<script src="<?php echo ROOT. "/public/user/js/app.js"; ?>"></script>
+<script src="<?php echo ROOT. "/public/user/js/product.js"; ?>"></script>
 </body>
 
 </html>

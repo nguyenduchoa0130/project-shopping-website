@@ -148,6 +148,7 @@ $(document).ready(function (e) {
                 values_otp,
               },
               success: function (data) {
+                $("#forget-password-loading").modal("hide");
                 let noti = JSON.parse(data);
                 if (noti["noti_code"] === 0) {
                   $("#register-notification").html(noti["message"]);
@@ -164,22 +165,29 @@ $(document).ready(function (e) {
                         "submit",
                         function (event) {
                           event.preventDefault();
-                          let newPassword =  $("#forget-password-form-complete-password").serialize();
+                          let newPassword = $(
+                            "#forget-password-form-complete-password"
+                          ).serialize();
                           $.ajax({
-                            type: "post", 
-                            url: "/project-shopping-website/modules/account/forget-password-handle.php",
-                            data: {newPassword},
-                            success: function(data){
+                            type: "post",
+                            url:
+                              "/project-shopping-website/modules/account/forget-password-handle.php",
+                            data: { newPassword },
+                            success: function (data) {
                               let noti = JSON.parse(data);
-                              if(noti["noti_code"] === 0){
-                                $("#forget-password-notification").html(noti["message"]);
-                              }else if(noti["noti_code"] === 1){
-                                $("#forget-password-notification-modal").modal("show");
-                                setTimeout(()=>{
+                              if (noti["noti_code"] === 0) {
+                                $("#forget-password-notification").html(
+                                  noti["message"]
+                                );
+                              } else if (noti["noti_code"] === 1) {
+                                $("#forget-password-notification-modal").modal(
+                                  "show"
+                                );
+                                setTimeout(() => {
                                   location.href = "../../index.php";
-                                }, 1000)
+                                }, 1000);
                               }
-                            }
+                            },
                           });
                         }
                       );
@@ -195,6 +203,4 @@ $(document).ready(function (e) {
       },
     });
   });
-
-  
 });

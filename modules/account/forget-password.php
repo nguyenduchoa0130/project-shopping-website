@@ -62,6 +62,26 @@ require_once __DIR__ . "/../../autoload/autoload.php";
             <!--/.Content-->
         </div>
     </div>
+    <div class="modal fade" id="forget-password-loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                   
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <img src="https://i.ibb.co/wsF3NZv/image.png" alt="Loading">
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
