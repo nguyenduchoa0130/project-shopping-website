@@ -21,6 +21,7 @@ require_once __DIR__ . "/../../layouts/header.php";
         if ($data_img) {
             $imgs = array();
             foreach ($data_img as $img) {
+                $img = resizeImage($img, 400, 350);
                 array_push($imgs, new ImageProduct($img));
             }
         } else {
