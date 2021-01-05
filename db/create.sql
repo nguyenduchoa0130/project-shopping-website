@@ -94,11 +94,11 @@ CREATE TABLE IF NOT EXISTS tbl_product (
   quantity int(11) NOT NULL DEFAULT '0',
   produced_at varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   description text COLLATE utf8_unicode_ci,
+  date_created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   id_category int(11) DEFAULT NULL,
   PRIMARY KEY (id_product),
   KEY FK_PRODUCT_CATEGORY (id_category)
-) ENGINE=MyISAM AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
---
+) ENGINE=MyISAM AUTO_INCREMENT=179 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 -- Đang đổ dữ liệu cho bảng `tbl_product`
 --
 
@@ -125,6 +125,16 @@ CREATE TABLE IF NOT EXISTS tbl_image_product (
 -- Đang đổ dữ liệu cho bảng `tbl_product_img`
 --
 
+DROP TABLE IF EXISTS tbl_review;
+CREATE TABLE IF NOT EXISTS tbl_review (
+  id_review int(11) NOT NULL AUTO_INCREMENT,
+  id_user int(11) NOT NULL,
+  id_product int(11) NOT NULL,
+  star int(11) NOT NULL,
+  message varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  date_review datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_review)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 COMMIT;
 
