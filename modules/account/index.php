@@ -29,8 +29,8 @@ $currentUser = $database->getCurrentUser();
                     <a href="#" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-archive mr-2"></i></span>Đơn Hàng</a>
                     <a href="#" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-heart mr-2"></i></i></span>Yêu Thích</a>
                     <a href="#" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-shopping-cart mr-2"></i></i></span> Giỏ Hàng</a>
-                    <a href="#" class="list-group-item list-group-item-action text-success"><span><i class="fas fa-store mr-2"></i></span>Trở lại mua sắm</a>
-                    <a href="#" class="list-group-item list-group-item-action text-danger"><span><i class="fas fa-sign-out-alt mr-2"></i></i></span>Đăng Xuất</a>
+                    <a href="../../index.php" class="list-group-item list-group-item-action text-success"><span><i class="fas fa-store mr-2"></i></span>Trở lại mua sắm</a>
+                    <a href="logout.php" class="list-group-item list-group-item-action text-danger"><span><i class="fas fa-sign-out-alt mr-2"></i></i></span>Đăng Xuất</a>
                 </div>
             </div>
             <div class="col-md-9">
@@ -60,7 +60,7 @@ $currentUser = $database->getCurrentUser();
                                     <div class="form-group row">
                                         <label for="newpass" class="col-4 col-form-label">Mật Khẩu Mới</label>
                                         <div class="col-8">
-                                            <input id="newpass" name="newpass" placeholder="Mật khẩu mới" class="form-control here" type="password">
+                                            <input id="newpass" name="password" placeholder="Mật khẩu mới" class="form-control here" type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
