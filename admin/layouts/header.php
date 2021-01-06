@@ -47,7 +47,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/project-shopping-website/admin/index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                    <span>Trang Chủ</span>
                 </a>
             </li>
 

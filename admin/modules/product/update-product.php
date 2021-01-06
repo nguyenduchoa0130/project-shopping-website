@@ -18,4 +18,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-}
+}   
