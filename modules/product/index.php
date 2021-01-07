@@ -9,18 +9,20 @@ if (isset($_GET["id_product"])) {
     try {
         $data = $database->fetchDataById("tbl_product", "id_product", $id_product);
         $product = new Product($data[0]);
-        $star = $product->number_liked / 10;
+        $star = $product->star / 10;
+        $star = ($star > 5) ? 5 : $star;
         $imgs = $database->fetchDataById("tbl_image_product", "id_product", $id_product);
     } catch (PDOException $e) {
         echo "Có lỗi khi thao tác với database " . $e->getMessage();
     }
+} else {
+    $product = null;
 }
 ?>
-<!-- Chi tiết sản phẩm -->
-<div class="container-fluid p-2">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <?php if ($product) : ?>
+<?php if ($product) : ?>
+    <div class="container-fluid p-2 position-relative">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card card-product my-2 d-flex justify-content-start">
                     <div class="container-fluid">
                         <div class="wrapper row">
@@ -76,13 +78,13 @@ if (isset($_GET["id_product"])) {
                                             <td>
                                                 <div class="rating m-0">
                                                     <div class="stars">
-                                                        <?php for ($i = 0; $i < $star; $i++) : ?>
+                                                        <?php for ($i = 0; $i < (int)$star; $i++) : ?>
                                                             <span class="fa fa-star text-waring h3 m-0"></span>
                                                         <?php endfor; ?>
-                                                        <?php for ($i = 0; $i < (5 - $star); $i++) : ?>
+                                                        <?php for ($i = 0; $i < (int)(5 - $star); $i++) : ?>
                                                             <span class="fa fa-star text-muted h3 m-0"></span>
                                                         <?php endfor; ?>
-                                                        <span class="star-no text-warning font-weight-bold h3"><?php echo "(" . ($product->number_liked * 1.0 / 10) . ")"; ?></span>
+                                                        <span class="star-no text-warning font-weight-bold h3"><?php echo "(" . $star . ")"; ?></span>
                                                     </div>
                                                 </div>
                                             </td>
@@ -109,7 +111,7 @@ if (isset($_GET["id_product"])) {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="container p-0">
+                                <div class="container p-0 position-relative">
                                     <div class="container m-0">
                                         <div class="row">
                                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 p-0">
@@ -131,52 +133,86 @@ if (isset($_GET["id_product"])) {
                                         </div>
                                         <div class="row my-4">
                                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 my-2">
-                                                <button type="button" class="btn btn-success w-100 py-2">
+                                                <button type="button" class="btn btn-success w-100 py-2 task-require-login" id="btn-add-to-cart" data-id="<?php echo $id_product; ?>"> 
                                                     <span class="h4 m-0 mr-2"><i class="fas fa-cash-register"></i></span>
                                                     <span class="h4 m-0">Chọn Mua</span>
                                                 </button>
                                             </div>
                                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 my-2">
-                                                <button type="button" class="btn btn-danger w-100 py-2">
+                                                <button type="button" id="btn-like" class="btn btn-danger w-100 py-2 task-require-login" data-id="<?php echo $id_product; ?>">
                                                     <span class="h4 m-0 mr-2"><i class="fas fa-heart"></i></span>
                                                     <span class="h4 m-0">Yêu Thích</span>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="toast" id="toast-notification" style="position: absolute; top:-10%; right: 0;" data-delay="2000">
+                                        <div class="toast-header">
+                                            <span><i class="fas fa-bell mr-3 text-warning"></i></span>
+                                            <strong class="mr-auto text-warning">Thông Báo</strong>
+                                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="toast-body" id="toast-notification-body">
+                                            Hello, world! This is a toast message.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php else : ?>
-                <div class="alert alert-danger" role="alert">
-                    <strong>Có lỗi đã xảy ra</strong>
-                </div>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="container-fluid">
-                        <h3 class="h2 font-weight-bold text-warning">
-                            <span><i class="fas fa-comments"></i></span>
-                            Đánh Giá - Nhận Xét Sản Phẩm
-                        </h3>
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="container-fluid">
+                            <h3 class="h2 font-weight-bold text-warning">
+                                <span><i class="fas fa-comments"></i></span>
+                                Đánh Giá - Nhận Xét Sản Phẩm
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="row">
 
+                </div>
             </div>
         </div>
+
+    </div>
+<?php else : ?>
+    <div class="alert alert-danger my-2" role="alert">
+        <strong>Không thể tải sản phẩm</strong>
+    </div>
+<?php endif; ?>
+<div class="modal" id="product-notification-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Thông Báo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="product-body-content">
+                <p class="h4 text-info"> Bạn chưa đăng nhập, đăng nhập để thực hiện thao tác</p>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <a type="button" class="btn btn-primary" href="<?php echo ROOT . "/modules/account/login.php"; ?>">Đăng Nhập</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
 </div>
-
-<!-- Chi tiết sản phẩm-->
 <?php
 require_once __DIR__ . "/../../layouts/footer.php";
 ?>

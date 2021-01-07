@@ -44,7 +44,7 @@ $currentUser = $database->getCurrentUser();
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <form method="post" action="<?php echo ROOT . "/modules/account/update.php"?>" id="profile-form">
+                                <form method="post" action="<?php echo ROOT . "/modules/account/update.php" ?>" id="profile-form">
                                     <div class="form-group row d-none">
                                         <label for="username" class="col-4 col-form-label"></label>
                                         <div class="col-8">
@@ -140,12 +140,45 @@ $currentUser = $database->getCurrentUser();
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="container-fluid text-center d-none" id="notification-alert">
+                                    <i class="fas fa-check h5 m-0 text-success"></i>
+                                    <p class="h5 m-0 text-success font-weight-bold d-inline-block" id="notification-content"> </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+
     <script src="https://kit.fontawesome.com/dcb76ae865.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <?php
+    if (isset($_SESSION["notification"])) {
+        if ($_SESSION["notification"] == 1) {
+            $message = "Cập nhật thành công";
+            echo
+                "
+            <script type='text/javascript'>
+                $(document).ready(function(){
+                    $('#notification-alert').removeClass('d-none');
+                    $('#notification-content').html('$message');
+                    setTimeout(()=>{
+                        $('#notification-content').html('');
+                        $('#notification-alert').addClass('d-none');
+                    }, 1000)
+                });
+             </script>
+             ";
+            unset($_SESSION["notification"]);
+        }
+    }
+    ?>
 </body>
 
 </html>

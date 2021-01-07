@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $data_img = $database->fetchDataById("tbl_account", "id_user", $id_user);
             $database->update("tbl_account", "id_user", $id_user, $props);
+            $_SESSION["notification"] = 1;
             header("Location: index.php");
         } catch (PDOException $e) {
             echo $e->getMessage();
