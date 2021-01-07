@@ -113,7 +113,7 @@ $(document).ready(function (e) {
           $("#login-notification").html(noti["message"]);
         } else if (noti["noti_code"] === 1) {
           setTimeout(() => {
-            location.href = "../../index.php";
+            window.location=document.referrer;
           }, 1000);
         } else {
           alert("Có lỗi nghiêm trọng đã xảy ra");
