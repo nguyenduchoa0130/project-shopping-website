@@ -76,25 +76,45 @@ $data = $database->fetchDataAll("tbl_category");
                     <!-- Tiêu Đề  -->
                     <hr class="my-2">
                     <!-- Sản Phẩm -->
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around" id="list-10-product-sellest">
                         <?php
-                        try {
-                            $data = $database->fetchDataAll("tbl_product");
-                            $product = new Product($data[0]);
-                            $img = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-                            echo createCardProduct($product, $img[0]);
-                            echo createCardProduct($product, $img[1]);
-                            echo createCardProduct($product, $img[2]);
-                            echo createCardProduct($product, $img[2]);
-                        } catch (PDOException $e) {
-                            echo $e->getMessage();
-                        }
+                        $total_record = 10;
+                        $limit = 3;
+                        $total_page = (ceil($total_record / $limit));
+                        // try {
+                        //     $data = $database->getProductSellest(0, $limit);
+                        //     $render = "";
+                        //     foreach ($data as $item) {
+                        //         $product = new Product($item);
+                        //         $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
+                        //         $render .= createCardProduct($product, $imgs[0]);
+                        //     }
+                        //     echo $render;
+                        // } catch (PDOException $e) {
+                        //     echo "Có lỗi khi thao tác với database " . $e->getMessage();
+                        // }
                         ?>
                     </div>
                     <!-- Sản Phẩm -->
                     <!-- Phân Trang -->
                     <div class="row d-flex justify-content-center">
-                        <?php require_once __DIR__ . "/pagination.php" ?>
+                        <div class="contaienr">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                                    </li>
+                                    <?php for ($i = 0; $i < $total_page; $i++) :  ?>
+                                        <li class="page-item">
+                                            <a class="page-link" data-task="<?php echo "sellest" ?>" data-page="<?php echo $i + 1 ?>"> <?php echo $i + 1 ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">&raquo;</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                     <!-- Phân Trang -->
                     <hr class="my-2">
@@ -119,18 +139,22 @@ $data = $database->fetchDataAll("tbl_category");
                     <!-- Tiêu Đề  -->
                     <hr class="my-2">
                     <!-- Sản Phẩm -->
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around" id="list-10-product-likest">
                         <?php
+                        $total_record = 10;
+                        $limit = 3;
+                        $total_page = (ceil($total_record / $limit));
                         try {
-                            $data = $database->fetchDataAll("tbl_product");
-                            $product = new Product($data[0]);
-                            $img = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-                            echo createCardProduct($product, $img[0]);
-                            echo createCardProduct($product, $img[1]);
-                            echo createCardProduct($product, $img[2]);
-                            echo createCardProduct($product, $img[2]);
+                            $data = $database->getProductLikest(0, $limit);
+                            $render = "";
+                            foreach ($data as $item) {
+                                $product = new Product($item);
+                                $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
+                                $render .= createCardProduct($product, $imgs[0]);
+                            }
+                            echo $render;
                         } catch (PDOException $e) {
-                            echo $e->getMessage();
+                            echo "Có lỗi khi thao tác với database " . $e->getMessage();
                         }
                         ?>
                     </div>
@@ -143,9 +167,11 @@ $data = $database->fetchDataAll("tbl_category");
                                     <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1">&laquo;</a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <?php for ($i = 0; $i < $total_page; $i++) :  ?>
+                                        <li class="page-item">
+                                            <a class="page-link" data-task="<?php echo "likest" ?>" data-page="<?php echo $i + 1 ?>"> <?php echo $i + 1 ?></a>
+                                        </li>
+                                    <?php endfor; ?>
                                     <li class="page-item">
                                         <a class="page-link" href="#">&raquo;</a>
                                     </li>
@@ -176,18 +202,22 @@ $data = $database->fetchDataAll("tbl_category");
                     <!-- Tiêu Đề  -->
                     <hr class="my-2">
                     <!-- Sản Phẩm -->
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around p-0 m-0" id="list-10-product-new">
                         <?php
+                        $total_record = 10;
+                        $limit = 3;
+                        $total_page = (ceil($total_record / $limit));
                         try {
-                            $data = $database->fetchDataAll("tbl_product");
-                            $product = new Product($data[0]);
-                            $img = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-                            echo createCardProduct($product, $img[0]);
-                            echo createCardProduct($product, $img[1]);
-                            echo createCardProduct($product, $img[2]);
-                            echo createCardProduct($product, $img[2]);
+                            $data = $database->getProductNewest(0, $limit);
+                            $render = "";
+                            foreach ($data as $item) {
+                                $product = new Product($item);
+                                $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
+                                $render .= createCardProduct($product, $imgs[0]);
+                            }
+                            echo $render;
                         } catch (PDOException $e) {
-                            echo $e->getMessage();
+                            echo "Có lỗi khi thao tác với database " . $e->getMessage();
                         }
                         ?>
                     </div>
@@ -200,9 +230,11 @@ $data = $database->fetchDataAll("tbl_category");
                                     <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1">&laquo;</a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <?php for ($i = 0; $i < $total_page; $i++) :  ?>
+                                        <li class="page-item">
+                                            <a class="page-link" data-task="<?php echo "new" ?>" data-page="<?php echo $i + 1 ?>"> <?php echo $i + 1 ?></a>
+                                        </li>
+                                    <?php endfor; ?>
                                     <li class="page-item">
                                         <a class="page-link" href="#">&raquo;</a>
                                     </li>

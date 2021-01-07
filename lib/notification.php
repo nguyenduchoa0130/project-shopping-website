@@ -6,6 +6,8 @@
         * @param noti_code
         *   0. Lỗi
         *   1. Thành công
+        *   2. Thêm (chỉ áp dụng cho bảng tbl_like)
+        *   3. Xóa (chỉ áp dụng cho bảng tbl_like)
         */
         public function __construct($noti_code, $message)
         {

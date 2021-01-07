@@ -342,49 +342,56 @@ function isExistsImage(array $data_img, $number_order)
     }
     return null;
 }
-function createStarRating($star){
+function createStarRating($star)
+{
+    $star = ($star/10 >5) ? 5 :  ($star/10);
     $str = "";
-    for($i = 0; $i < $star; $i++){
-        $str .= "<span class='h3 m-0'><i class='fa-star text-waring'></i></span>";
+    for ($i = 0; $i < (int)$star; $i++) {
+        $str .= "<span class='h3 m-0'><i class='fa fa-star text-waring'></i></span>";
     }
-    for($i = 0; $i < (5-$star); $i++){
-        $str .= "<span class='h3 m-0'><i class='fa-star text-muted'></i></span>";
+    for ($i = 0; $i < (int)(5 - $star); $i++) {
+        $str .= "<span class='h3 m-0'><i class='fa fa-star text-muted'></i></span>";
     }
+    $str .= "<span class='h3 m-0'><span class='ml-2 badge badge-warning'>{$star}</span></span>";
     return $str;
 }
-function createSrcImage($strBase64){
+function createSrcImage($strBase64)
+{
     return "data:image;base64, {$strBase64}";
 }
 function createCardProduct($product, $img)
 {
     $img = resizeImage($img, 200, 200);
-    $url = ROOT."/modules/product/index.php?id_product={$product->id_product}";
+    $url = ROOT . "/modules/product/index.php?id_product={$product->id_product}";
     $src = createSrcImage($img['image']);
-    $header = 
-    "
-    <div class='card shadow-sm border-light mb-4 mx-2'>
+    $header =
+        "
+    <div class='card border border-secondary mb-4 mr-2 col-xs-2 col-sm-2 col-md-3 col-lg-3'>
     <a href='{$url}' class='position-relative d-block m-auto'>
         <img src='{$src}' alt='image'>
     </a>
     <div class='card-body'>
-        <a href='{$url}'>
-            <h5 class='font-weight-normal'>{$product->name_product}</h5>
-        </a>
+            <a href='{$url}' class='text-decoration-none'>
+                <h4 class='font-weight-normal'>{$product->name_product}</h4>
+            </a>
+        
         <div class='post-meta'>
             <span class='small lh-120'><i class='fas fa-map-marker-alt mr-2'></i>Sản xuất tại: {$product->produced_at}</span>
         </div>
         <div class='d-flex my-4'>
     ";
-    $star = $product->number_liked/10;
+    $star = $product->star / 10;
+    $star = ($star > 5) ? 5 : $star;
     $middle = "";
-    for($i = 0; $i < $star; $i++){
+    for ($i = 0; $i < (int)$star; $i++) {
         $middle .= " <i class='star fas fa-star text-warning'></i>";
     }
-    for($i = 0; $i < (5- $star); $i++){
+    for ($i = 0; $i < (5 - (int)$star); $i++) {
         $middle .= " <i class='star fas fa-star text-muted'></i>";
     }
+
     $footer = "
-    <span class='badge badge-pill badge-success ml-2'>{$product->number_liked}</span>
+    <span class='badge badge-pill badge-success ml-2'>{$star}</span>
         </div>
         <div class='d-flex justify-content-between text-wrap'>
             <div class='col pl-0 text-center' style='border-right: 2px solid #E9EDDC;'>
@@ -409,7 +416,106 @@ function createCardProduct($product, $img)
     </div>
 </div> 
     ";
-    return $header.$middle.$footer;
+    return $header . $middle . $footer;
+}
+function createCardProductLike($product, $img)
+{
+    $url = ROOT. "/modules/product/index.php?id_product={$product->id_product}";
+    $img = resizeImage($img, 250, 150);
+    $src = createSrcImage($img["image"]);
+    return "
+    <div class='card shadow-sm border-primary mb-4 p-0 col-xs-3 col-sm-3 col-md-3 col-lg-3 '>
+        <a href='{$url}' class='text-decoration-none position-relative '>
+            <img src='{$src}' class='card-img-top' alt='image'> </a>
+        <div class='card-body  position-relative'>
+            <a href='{$url}' class='text-decoration-none'>
+                <h5 class='font-weight-normal mb-4'>{$product->name_product}</h5>
+            </a>
+            <div class='d-flex my-2'>
+            ".
+            createStarRating($product->star)
+            ."
+            </div>
+            <div class='row p-2'>
+                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 p-2'>
+                    <p class='text-primary font-italic h5 mx-1'>Số Lượng: </p>
+                    <div class='input-group'>
+                        <span class='input-group-prepend'>
+                            <button type='button' class='btn btn-outline-danger btn-number' disabled='disabled' data-type='minus' data-field='quant[1]'>
+                                <span class='fa fa-minus'></span>
+                            </button>
+                        </span>
+                        <input type='text' id='quantity' name='quant[1]' class='form-control input-number text-center font-weight-bold' value='1' min='1' max='{$product->quantity}'>
+                        <span class='input-group-append'>
+                            <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='quant[1]'>
+                                <span class='fa fa-plus'></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='row container-fluid d-flex justify-content-around m-0 p-0'>
+                <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center my-2 w-100'>
+                    <a class='btn btn-success w-100 py-2 px-6' href='{$url}'>
+                        <i class='fas fa-file-invoice h3 m-0'></i>
+                    </a>
+                </div>
+                <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center my-2 w-100'>
+                    <button class='btn btn-primary w-100 py-2 px-6' id='btn-add-to-cart' data-id='{$product->id_product}'>
+                        <i class='fas fa-cart-plus h3 m-0'></i>
+                    </button>
+                </div>
+                <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center my-2 w-100'>
+                    <button class='btn btn-danger w-100 py-2 px-6' id='btn-dislike'  data-id='{$product->id_product}'>
+                        <i class='fas fa-heart-broken h3 m-0'></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+</div>
+            ";
+}
+function createCardProductCart($id_product, $name_product, $price, $quantitySelect, $quantityRemain, $img){
+    $img = resizeImage($img, 150, 150);
+    $src = createSrcImage($img["image"]);
+    return "
+    <div class='card mb-3 mt-2 border border-primary container'>
+        <div class='row'>
+            <div class='col-xs-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0' style='border-right: 1px solid #1B8AF2'>
+                <div class='container h-100 d-flex justify-content-center align-items-center mt-2'>
+                    <input type='checkbox' style='transform: scale(2);' class='select-product'>
+                </div>
+            </div>
+            <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 py-2 d-flex justify-content-center align-items-center' style='border-right: 1px solid #1B8AF2'>
+                <img src='{$src}' alt='Image product'>
+            </div>
+            <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>
+                <div class='card-body'>
+                    <h5 class='card-title h3 text-primary name'> {$name_product} </h5>
+                    <p class='card-text h3 text-danger price'>Giá: {$price}</p>
+                    <p class='card-text h6 text-info font-italic'>(Chỉ còn {$quantityRemain} sản phẩm)</p>
+                    <div class='input-group w-50'>
+                        <span class='input-group-prepend'>
+                            <button type='button' class='btn btn-outline-danger btn-number' disabled='disabled' data-type='minus' data-field='quant[1]'>
+                                <span class='fa fa-minus'></span>
+                            </button>
+                        </span>
+                        <input type='text' id='quantity-{$id_product}' name='quant[1]' class='form-control input-number text-center font-weight-bold quantity' value='{$quantitySelect}' min='1' max='{$quantityRemain}'>
+                        <span class='input-group-append'>
+                            <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='quant[1]'>
+                                <span class='fa fa-plus'></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-xs-1 col-sm-1 col-md-1 col-lg-1 p-1 m-0 d-flex justify-content-end align-items-start'>
+                <button class='btn btn-danger' id='btn-remove-product-cart'><span class='h3 m-0'>×</span></button>
+            </div>
+        </div>
+    </div>
+                            ";
 }
 function resizeImage($img, $new_width, $new_height)
 {

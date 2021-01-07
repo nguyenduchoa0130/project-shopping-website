@@ -6,6 +6,7 @@ class Product{
     public $quantity = 0;
     public $status = true;
     public $number_liked = 0;
+    public $star = 0;
     public $produced_at;
     public $description;
     public $id_category;    
@@ -17,6 +18,7 @@ class Product{
        $this->quantity = $props["quantity"];
        $this->status = $props["status"];
        $this->number_liked = $props["number_liked"];
+       $this->star = $props["star"];
        $this->produced_at = $props["produced_at"];  
        $this->description = $props["description"];
        $this->id_category = $props["id_category"];
