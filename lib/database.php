@@ -9,7 +9,23 @@ class Database
         $this->connection = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $username, $password);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-
+    public function getNameProduct($id_product){
+        $sql = "SELECT `name_product` FROM `tbl_product` WHERE `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchColumn();
+    }
+    public function findProductLike($id_user, $id_product){
+        $sql = "SELECT * FROM `tbl_like` WHERE `id_user` = {$id_user} AND `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+    public function deleteProductLike($id_user, $id_product){
+        $sql = "DELETE FROM `tbl_like` WHERE `id_user` = {$id_user} AND `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        return $query->execute();
+    }
     public function disconnect()
     {
         $this->connection = null;
@@ -19,6 +35,22 @@ class Database
         $query = $this->connection->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+    public function getNumberRow($table_name){
+        $sql = "SELECT COUNT(*) FROM `{$table_name}`";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchColumn();
+    }
+    public function addLike($id_product){
+        $sql = "UPDATE tbl_product set `number_liked` = `number_liked` + 1 WHERE `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+    }
+    public function subLike($id_product){
+        $sql = "UPDATE `tbl_product` set `number_liked` = `number_liked` - 1 WHERE `id_product` = {$id_product} AND `number_liked` > 0";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
     }
     public function fetchDataAll($table)
     {
@@ -91,5 +123,53 @@ class Database
             return $this->findAccountByUsername($_SESSION["username"]);
         }
         return null;
+    }
+    public function getPriceProduct($id_product){
+        $sql = "SELECT * FROM `tbl_product` WHERE `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC)["price"];
+    }
+    public function getCart($id_user){
+        $sql = "SELECT * FROM `tbl_cart` WHERE `id_user` = {$id_user}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getCartDetail($id_cart, $id_product){
+        $sql = "SELECT * FROM `tbl_cart_detail` WHERE `id_cart` = {$id_cart} AND `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getProductNewest($start, $limit){
+        $sql = "SELECT * FROM `tbl_product` ORDER BY `date_created` LIMIT {$start}, {$limit};";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+    public function getProductLikest($start, $limit){
+        $sql = "SELECT * FROM `tbl_product` ORDER BY `number_liked` DESC  LIMIT {$start}, {$limit};";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+    public function getProductSellest($start, $limit){
+        $sql = "SELECT * FROM `tbl_product` ORDER BY `number_liked` DESC  LIMIT {$start}, {$limit};";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+    public function getProductLike($id_user, $start, $limit){
+        $sql = "SELECT * FROM `tbl_like` WHERE `id_user` = {$id_user} LIMIT {$start}, {$limit}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        $infoProduct =  $query->fetchAll();
+        $listProduct = array();
+        foreach($infoProduct as $info){
+            $product = new Product($this->fetchDataById("tbl_product", "id_product", $info["id_product"])[0]);
+            array_push($listProduct, $product);
+        }
+        return $listProduct;
     }
 }
