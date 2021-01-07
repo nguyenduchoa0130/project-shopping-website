@@ -91,6 +91,9 @@ require_once __DIR__ . "/../autoload/autoload.php";
 <script src="<?php echo ROOT. "/public/user/js/slideshow.js"; ?>"></script>
 <script src="<?php echo ROOT. "/public/user/js/app.js"; ?>"></script>
 <script src="<?php echo ROOT. "/public/user/js/product.js"; ?>"></script>
+<script src="<?php echo ROOT. "/public/user/js/like.js"; ?>"></script>
+<script src="<?php echo ROOT. "/public/user/js/order.js"; ?>"></script>
+<script src="<?php echo ROOT. "/public/user/js/cart.js"; ?>"></script>
 </body>
 
 </html>
