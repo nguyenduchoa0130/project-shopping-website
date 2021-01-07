@@ -136,6 +136,59 @@ CREATE TABLE IF NOT EXISTS tbl_review (
   PRIMARY KEY (id_review)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+DROP TABLE IF EXISTS `tbl_cart`;
+CREATE TABLE IF NOT EXISTS `tbl_cart` (
+  `id_cart` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_cart`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+DROP TABLE IF EXISTS `tbl_cart_detail`;
+CREATE TABLE IF NOT EXISTS `tbl_cart_detail` (
+  `id_cart_detail` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cart` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id_cart_detail`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `tbl_order`;
+CREATE TABLE IF NOT EXISTS `tbl_order` (
+  `id_order` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_deleveried` datetime DEFAULT NULL,
+  `date_completed` datetime DEFAULT NULL,
+  `ship_cash` int(11) NOT NULL DEFAULT '20000',
+  `sum_cash` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_order`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `tbl_order_detail`;
+CREATE TABLE IF NOT EXISTS `tbl_order_detail` (
+  `id_order_detail` int(11) NOT NULL AUTO_INCREMENT,
+  `id_order` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id_order_detail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `tbl_review`;
+CREATE TABLE IF NOT EXISTS `tbl_review` (
+  `id_review` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `star` int(11) NOT NULL,
+  `message` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date_review` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_review`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
