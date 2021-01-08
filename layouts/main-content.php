@@ -96,13 +96,14 @@ $data = $database->fetchDataAll("tbl_category");
                         ?>
                     </div>
                     <!-- Sản Phẩm -->
+
                     <!-- Phân Trang -->
                     <div class="row d-flex justify-content-center">
                         <div class="contaienr">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                                    <li class="page-item">
+                                        <a class="page-link previous" tabindex="-1">&laquo;</a>
                                     </li>
                                     <?php for ($i = 0; $i < $total_page; $i++) :  ?>
                                         <li class="page-item">
@@ -110,7 +111,7 @@ $data = $database->fetchDataAll("tbl_category");
                                         </li>
                                     <?php endfor; ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="#">&raquo;</a>
+                                        <a class="page-link next" tabindex="-1">&raquo;</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -159,12 +160,13 @@ $data = $database->fetchDataAll("tbl_category");
                         ?>
                     </div>
                     <!-- Sản Phẩm -->
+
                     <!-- Phân Trang -->
                     <div class="row d-flex justify-content-center">
                         <div class="contaienr">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
-                                    <li class="page-item disabled">
+                                    <li class="page-item">
                                         <a class="page-link" href="#" tabindex="-1">&laquo;</a>
                                     </li>
                                     <?php for ($i = 0; $i < $total_page; $i++) :  ?>
@@ -222,12 +224,13 @@ $data = $database->fetchDataAll("tbl_category");
                         ?>
                     </div>
                     <!-- Sản Phẩm -->
+
                     <!-- Phân Trang -->
                     <div class="row d-flex justify-content-center">
                         <div class="contaienr">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
-                                    <li class="page-item disabled">
+                                    <li class="page-item">
                                         <a class="page-link" href="#" tabindex="-1">&laquo;</a>
                                     </li>
                                     <?php for ($i = 0; $i < $total_page; $i++) :  ?>

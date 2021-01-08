@@ -21,6 +21,7 @@ if (isset($_GET["id_product"])) {
 ?>
 <?php if ($product) : ?>
     <div class="container-fluid p-2 position-relative">
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card card-product my-2 d-flex justify-content-start">
@@ -79,7 +80,7 @@ if (isset($_GET["id_product"])) {
                                                 <div class="rating m-0">
                                                     <div class="stars">
                                                         <?php for ($i = 0; $i < (int)$star; $i++) : ?>
-                                                            <span class="fa fa-star text-waring h3 m-0"></span>
+                                                            <span class="fa fa-star text-warning h3 m-0"></span>
                                                         <?php endfor; ?>
                                                         <?php for ($i = 0; $i < (int)(5 - $star); $i++) : ?>
                                                             <span class="fa fa-star text-muted h3 m-0"></span>
@@ -118,13 +119,13 @@ if (isset($_GET["id_product"])) {
                                                 <p class="text-primary font-italic h5 mx-1">Số Lượng: </p>
                                                 <div class="input-group">
                                                     <span class="input-group-prepend">
-                                                        <button type="button" class="btn btn-outline-danger btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                                        <button type="button" class="btn btn-outline-danger btn-number" disabled="disabled" data-type="minus" data-field="quantity">
                                                             <span class="fa fa-minus"></span>
                                                         </button>
                                                     </span>
-                                                    <input type="text" id="quantity" name="quant[1]" class="form-control input-number text-center font-weight-bold" value="1" min="1" max="<?php echo $product->quantity; ?>">
+                                                    <input type="text" id="quantity" name="quantity" class="form-control input-number text-center font-weight-bold" value="1" min="1" max="<?php echo $product->quantity; ?>">
                                                     <span class="input-group-append">
-                                                        <button type="button" class="btn btn-outline-success btn-number" data-type="plus" data-field="quant[1]">
+                                                        <button type="button" class="btn btn-outline-success btn-number" data-type="plus" data-field="quantity">
                                                             <span class="fa fa-plus"></span>
                                                         </button>
                                                     </span>
@@ -133,7 +134,7 @@ if (isset($_GET["id_product"])) {
                                         </div>
                                         <div class="row my-4">
                                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 my-2">
-                                                <button type="button" class="btn btn-success w-100 py-2 task-require-login" id="btn-add-to-cart" data-id="<?php echo $id_product; ?>"> 
+                                                <button type="button" class="btn btn-success w-100 py-2 task-require-login" id="btn-add-to-cart" data-id="<?php echo $id_product; ?>">
                                                     <span class="h4 m-0 mr-2"><i class="fas fa-cash-register"></i></span>
                                                     <span class="h4 m-0">Chọn Mua</span>
                                                 </button>
@@ -166,19 +167,73 @@ if (isset($_GET["id_product"])) {
             </div>
         </div>
         <div class="row">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="container-fluid">
-                            <h3 class="h2 font-weight-bold text-warning">
-                                <span><i class="fas fa-comments"></i></span>
-                                Đánh Giá - Nhận Xét Sản Phẩm
-                            </h3>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="container-fluid">
+                    <h3 class="h2 font-weight-bold text-warning">
+                        <span><i class="fas fa-comments"></i></span>
+                        Đánh Giá - Nhận Xét Sản Phẩm
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <?php if ($currentUser) : ?>
+            <div class="row my-2">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="container">
+                        <div class="card d-flex flex-column">
+                            <form action="" method="post" id="form-review">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="comment" name="comment" rows="4" placeholder="Viết nhận xét...   " required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="rating ml-3">
+                                        <input type="radio" name="rating" value="5" id="5"><label for="5" class="h1 m-0">☆</label>
+                                        <input type="radio" name="rating" value="4" id="4"><label for="4" class="h1 m-0">☆</label>
+                                        <input type="radio" name="rating" value="3" id="3"><label for="3" class="h1 m-0">☆</label>
+                                        <input type="radio" name="rating" value="2" id="2"><label for="2" class="h1 m-0">☆</label>
+                                        <input type="radio" name="rating" value="1" id="1"><label for="1" class="h1 m-0">☆</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="btn-review" class="btn btn-primary ml-3" data-id="<?php echo $id_product; ?>">Gửi nhận xét </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+            </div>
+        <?php endif; ?>
+        <hr class="my-2">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="container" id="review">
+                    <?php 
+                        $reviewData = $database->fetchDataById("tbl_review", "id_product", $product->id_product);
+                        foreach($reviewData as $data){
+                            $name = $database->fetchDataById("tbl_account", "id_user", $data["id_user"])[0];
+                            $name = $name["fullname"];
+                            $star = $data["star"];
+                            $time = $data["date_review"];
+                            $message = $data["message"];
+                            echo createCardReview($name, $star, $time, $message);
+                        }
+                    ?>
+                </div>
 
+                <div class="contaienr my-2 d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">&raquo;</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -207,6 +262,29 @@ if (isset($_GET["id_product"])) {
             <!--Footer-->
             <div class="modal-footer">
                 <a type="button" class="btn btn-primary" href="<?php echo ROOT . "/modules/account/login.php"; ?>">Đăng Nhập</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<div class="modal" id="review-notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Thông Báo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="review-notification-body">
+                <p class="h4 text-success"> Đã gửi nhận xét</p>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
             </div>
         </div>

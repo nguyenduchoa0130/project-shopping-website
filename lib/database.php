@@ -143,7 +143,7 @@ class Database
         return $query->fetch(PDO::FETCH_ASSOC);
     }
     public function getProductNewest($start, $limit){
-        $sql = "SELECT * FROM `tbl_product` ORDER BY `date_created` LIMIT {$start}, {$limit};";
+        $sql = "SELECT * FROM `tbl_product` ORDER BY `date_created` DESC LIMIT {$start}, {$limit};";
         $query = $this->connection->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -172,4 +172,36 @@ class Database
         }
         return $listProduct;
     }
+    public function addStar($id_product, $star){
+        $sql = "UPDATE `tbl_product` SET `star` = `star` + $star WHERE `id_product` = $id_product";
+        $query = $this->connection->prepare($sql);
+        return $query->execute();
+    }
+    public function getOrderByStatus($status){
+        $sql =  "SELECT * FROM `tbl_order` WHERE `status` = {$status}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+    public function updateStatusOrder($id_order, $status, $date_delevery = null, $date_completed = null, $note = null){
+        $sql = "UPDATE `tbl_order` SET `status` = ?, `date_delevery` = ?, `date_completed` = ?, `note` = ? WHERE `id_order` = ?";
+        $query = $this->connection->prepare($sql);
+        return $query->execute(array($status, $date_delevery,  $date_completed, $note, $id_order));
+    }
+    public function updateQuantityProduct($id_product, $quantity){
+        $sql = "SELECT `quantity` FROM `tbl_product` WHERE `id_product` = {$id_product}";
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+        $remain = $query->fetchColumn();
+        if($remain < $remain){
+            $sql = "UPDATE `tbl_product` SET `quantity` = 0 WHERE `id_product` = {$id_product}";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+        }else{
+            $sql = "UPDATE `tbl_product` SET `quantity` = `quantity` - {$quantity} WHERE `id_product` = {$id_product}";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+        }
+    }
+
 }

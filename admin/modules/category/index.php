@@ -1,33 +1,39 @@
 <?php
 require_once __DIR__ . "/../../../autoload/autoload.php";
-?>
-<?php
 require_once __DIR__ . "/../../layouts/header.php";
+$currentUser = $database->getCurrentUser();
+if ($currentUser) {
+    $currentUser = new Account($currentUser);
+} else {
+    $currentUser = null;
+}
 ?>
-<!-- TODO Nội dung trang -->
-<div class="container-fluid">
+<?php if ($currentUser) : ?>
+    <?php if ($currentUser->role == 0) : ?>
+        <div class="container-fluid">
+            <!-- TODO Nội dung trang -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="">
+                        <span><i class="fas fa-shopping-bag"></i>
+                        </span> Quản Lý Sản Phẩm
+                    </a>
+                    <button type="button" class="btn btn-primary waves-effect waves-light d-inline" data-toggle="modal" data-target="#addCategory">
+                        <span><i class="fas fa-plus"></i></span>
+                        Thêm Mới
+                    </button>
+                </div>
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none" href="">
-            <span><i class="fas fa-shopping-bag"></i>
-            </span> Quản Lý Sản Phẩm
-        </a>
-        <button type="button" class="btn btn-primary waves-effect waves-light d-inline" data-toggle="modal" data-target="#addCategory">
-            <span><i class="fas fa-plus"></i></span>
-            Thêm Mới
-        </button>
-    </div>
+                <hr class="my-4">
 
-    <hr class="my-4">
-
-    <!-- Content Row -->
-    <?php
-    $categories = $database->fetchDataAll("tbl_category");
-    if ($categories != null) {
-        foreach ($categories as $category) {
-            $item = new Category($category);
-            echo "
+                <!-- Content Row -->
+                <?php
+                $categories = $database->fetchDataAll("tbl_category");
+                if ($categories != null) {
+                    foreach ($categories as $category) {
+                        $item = new Category($category);
+                        echo "
                     <div class='card m-2 text-success font-weight-bold d-inline-block' style='width: 18rem; '>
                         <div class='container-fluid text-center h1 pt-3 pb-3 border-bottom'>
                             <span><i class='{$item->get_ImgCategory()}'></i></span>
@@ -46,104 +52,118 @@ require_once __DIR__ . "/../../layouts/header.php";
                         </div>
                     </div>   
                 ";
-        }
-    } else {
-        echo "
+                    }
+                } else {
+                    echo "
                 <div class='alert alert-warning' role='alert'>
                     Không có danh mục sản phẩm nào
                 </div> 
             ";
-    }
-    ?>
+                }
+                ?>
 
-    <!-- Content Row Thêm Danh Mục Sản Phẩm-->
-    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <!--Content-->
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header text-center  bg-primary text-light">
-                    <h4 class="font-weight-bold modal-title w-100" id="myModalLabel">Thêm Danh Mục Sản Phẩm</h4>
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div class="modal-body content-add-category p-3">
-                    <form action="" method="post" id="formAddCategory" accept-charset="utf-8">
-                        <div class="form-group">
-                            <label for="name_category">Tên Danh Mục</label>
-                            <input class="form-control" id="name_category" name="name_category" type="text" placeholder="Tên Danh Mục Sản Phẩm" required>
+                <!-- Content Row Thêm Danh Mục Sản Phẩm-->
+                <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <!--Content-->
+                        <div class="modal-content">
+                            <!--Header-->
+                            <div class="modal-header text-center  bg-primary text-light">
+                                <h4 class="font-weight-bold modal-title w-100" id="myModalLabel">Thêm Danh Mục Sản Phẩm</h4>
+                                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--Body-->
+                            <div class="modal-body content-add-category p-3">
+                                <form action="" method="post" id="formAddCategory" accept-charset="utf-8">
+                                    <div class="form-group">
+                                        <label for="name_category">Tên Danh Mục</label>
+                                        <input class="form-control" id="name_category" name="name_category" type="text" placeholder="Tên Danh Mục Sản Phẩm" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary m-auto">Thêm</button>
+                                        <button type="button" class="btn btn-danger m-auto" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--Footer-->
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary m-auto">Thêm</button>
-                            <button type="button" class="btn btn-danger m-auto" data-dismiss="modal">Đóng</button>
-                        </div>
-                    </form>
-                </div>
-                <!--Footer-->
-            </div>
-            <!--/.Content-->
-        </div>
-    </div>
-    <!-- Content Row Sủa Tên Danh Mục Sản Phẩm -->
-    <div class="modal fade" id="updateNameCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <!--Content-->
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header text-center  bg-primary text-light">
-                    <h4 class="font-weight-bold modal-title w-100" id="myModalLabel"> Danh Mục Sản Phẩm</h4>
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div class="modal-body content-update-category p-3">
-                    <form action="" method="post" id="formUpdateNameCategory" accept-charset="utf-8">
-                        <div class="form-group">
-                            <label for="name_category">Tên Danh Mục</label>
-                            <input class="form-control" id="name_category" name="name_category" type="text" placeholder="Tên Danh Mục Sản Phẩm" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary m-auto">Sửa</button>
-                            <button type="button" class="btn btn-danger m-auto" data-dismiss="modal">Đóng</button>
-                        </div>
-                    </form>
-                </div>
-                <!--Footer-->
-            </div>
-            <!--/.Content-->
-        </div>
-    </div>
-    <div class="modal fade" id="showNotificationRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <!--Content-->
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header bg-info">
-                    <h4 class="modal-title w-100 text-white font-weight-bold" id="myModalLabel"><span><i class="fas fa-exclamation-triangle"></i></span> Thông Báo</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div class="modal-body content-notifation-remove">
-                    <h4 class="modal-title w-100 text-danger" id="myModalLabel">Bạn có thật sự muốn xóa danh mục này. Xóa danh mục sẽ xóa tất cả các sản phẩm của danh mục đó ?</h4>
-                    <div class="modal-footer">
-                        <button type="button" id="btn-remove-category" class="btn btn-danger">Xóa</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                        <!--/.Content-->
                     </div>
                 </div>
-                <!--Footer-->
+                <!-- Content Row Sủa Tên Danh Mục Sản Phẩm -->
+                <div class="modal fade" id="updateNameCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <!--Content-->
+                        <div class="modal-content">
+                            <!--Header-->
+                            <div class="modal-header text-center  bg-primary text-light">
+                                <h4 class="font-weight-bold modal-title w-100" id="myModalLabel"> Danh Mục Sản Phẩm</h4>
+                                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--Body-->
+                            <div class="modal-body content-update-category p-3">
+                                <form action="" method="post" id="formUpdateNameCategory" accept-charset="utf-8">
+                                    <div class="form-group">
+                                        <label for="name_category">Tên Danh Mục</label>
+                                        <input class="form-control" id="name_category" name="name_category" type="text" placeholder="Tên Danh Mục Sản Phẩm" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary m-auto">Sửa</button>
+                                        <button type="button" class="btn btn-danger m-auto" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--Footer-->
+                        </div>
+                        <!--/.Content-->
+                    </div>
+                </div>
+                <div class="modal fade" id="showNotificationRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <!--Content-->
+                        <div class="modal-content">
+                            <!--Header-->
+                            <div class="modal-header bg-info">
+                                <h4 class="modal-title w-100 text-white font-weight-bold" id="myModalLabel"><span><i class="fas fa-exclamation-triangle"></i></span> Thông Báo</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--Body-->
+                            <div class="modal-body content-notifation-remove">
+                                <h4 class="modal-title w-100 text-danger" id="myModalLabel">Bạn có thật sự muốn xóa danh mục này. Xóa danh mục sẽ xóa tất cả các sản phẩm của danh mục đó ?</h4>
+                                <div class="modal-footer">
+                                    <button type="button" id="btn-remove-category" class="btn btn-danger">Xóa</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                            <!--Footer-->
+
+                        </div>
+                        <!--/.Content-->
+                    </div>
+                </div>
 
             </div>
-            <!--/.Content-->
+            <!-- TODO Nội dung trang -->
+        <?php else : ?>
+            <div class="alert alert-primary my-2" role="alert">
+                <strong>Bạn không thể thực hiện thao tác này</strong>
+            </div>
+        <?php endif; ?>
+    <?php else : ?>
+        <div class="alert alert-danger my-2" role="alert">
+            <strong>Vui lòng đăng nhập để tiếp tục</strong>
+            <a href="<?php echo ROOT . "/modules/account/login.php" ?>" class="font-weight-bold h6 m-0 text-primary"> Đăng Nhập</a>
         </div>
-    </div>
+    <?php endif; ?>
+    <!-- TODO Nội dung trang -->
 
-</div>
-<!-- TODO Nội dung trang -->
-<?php
-require_once __DIR__ . "/../../layouts/footer.php";
-?>
+    <!-- TODO Nội dung trang -->
+    <?php
+    require_once __DIR__ . "/../../layouts/footer.php";
+    ?>

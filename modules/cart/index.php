@@ -82,18 +82,25 @@ if ($currentUser) {
                                 </tr>
                             </thead>
                             <tbody id="order-detail-body">
-                                
+
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="5">
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-
+                                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="order-detail-footer">
+                                                    <span class="h5 m-0 text-success">Phí vận chuyển:</span> <span class="h5 m-0 text-danger" id="price-ship">0</span>
+                                                    <div></div>
+                                                    <span class="h5 text-success m-0">Tổng tiền:</span> <span class="h5 m-0 text-danger" id="sum-cash">0</span>
+                                                    <div></div>
+                                                    <span class="h5 text-success m-0">Thanh toán: <span class="h5 m-0 text-danger">Thanh toán khi nhận hàng</span></span>
+                                                    <div></div>
+                                                    <span class="h5 text-success m-0">Địa chỉ nhận hàng: <span class="h5 m-0 text-danger"><?php echo $currentUser->address ?></span></span>
+                                                    <div></div>
                                                 </div>
                                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-end align-items-end">
-                                                    <button class="btn btn-success h3 m-0 font-weight-bold"><span>Thanh Toán</span></button>
+                                                    <button class="btn btn-success h3 m-0 font-weight-bold" id="btn-pay"><span>Đặt hàng</span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +122,29 @@ if ($currentUser) {
         <strong>Bạn phải đăng nhập để thực hiện, chức năng này</strong>
     </div>
 <?php endif; ?>
-
+<div class="modal" id="cart-notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center text-danger" id="myModalLabel">Thông báo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="cart-notification-body">
+                ...
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
 <?php
 require_once __DIR__ . "/../../layouts/footer.php";
 ?>

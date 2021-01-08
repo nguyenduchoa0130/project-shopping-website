@@ -487,7 +487,7 @@ function createCardProductCart($id_product, $name_product, $price, $quantitySele
                     <input type='checkbox' style='transform: scale(2);' class='select-product'>
                 </div>
             </div>
-            <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 py-2 d-flex justify-content-center align-items-center' style='border-right: 1px solid #1B8AF2'>
+            <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 py-3 d-flex justify-content-center align-items-center' style='border-right: 1px solid #1B8AF2'>
                 <img src='{$src}' alt='Image product'>
             </div>
             <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>
@@ -497,13 +497,13 @@ function createCardProductCart($id_product, $name_product, $price, $quantitySele
                     <p class='card-text h6 text-info font-italic'>(Chỉ còn {$quantityRemain} sản phẩm)</p>
                     <div class='input-group w-50'>
                         <span class='input-group-prepend'>
-                            <button type='button' class='btn btn-outline-danger btn-number' disabled='disabled' data-type='minus' data-field='quant[1]'>
+                            <button type='button' class='btn btn-outline-danger btn-number' disabled='disabled' data-type='minus' data-field='{$id_product}'>
                                 <span class='fa fa-minus'></span>
                             </button>
                         </span>
-                        <input type='text' id='quantity-{$id_product}' name='quant[1]' class='form-control input-number text-center font-weight-bold quantity' value='{$quantitySelect}' min='1' max='{$quantityRemain}'>
+                        <input type='text' id='quantity-{$id_product}' name='{$id_product}' class='form-control input-number text-center font-weight-bold quantity' value='{$quantitySelect}' min='1' max='{$quantityRemain}'>
                         <span class='input-group-append'>
-                            <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='quant[1]'>
+                            <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='{$id_product}'>
                                 <span class='fa fa-plus'></span>
                             </button>
                         </span>
@@ -516,6 +516,31 @@ function createCardProductCart($id_product, $name_product, $price, $quantitySele
         </div>
     </div>
                             ";
+}
+function createCardReview($name, $star, $time, $message){
+    $strStar = "";
+    for($i = 0; $i <$star; $i++){
+        $strStar.= "<span class='float-right'><i class='text-warning fa fa-star'></i></span>";
+    }
+    return 
+    "
+    <div class='card my-2'>
+        <div class='card-body'>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <p>
+                    <p class='float-left'><strong>{$name}</strong><span class='ml-3 font-italic'>($time)</span></p>
+                    ".$strStar."
+                    </p>
+                    <div class='clearfix'></div>
+                    <p>
+                        $message
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    ";
 }
 function resizeImage($img, $new_width, $new_height)
 {
@@ -540,3 +565,4 @@ function resizeImage($img, $new_width, $new_height)
     $img["image"] = $theme_image_enc_little;
     return $img;
 }
+

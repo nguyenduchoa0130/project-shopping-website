@@ -16,17 +16,21 @@ if ($currentUser) {
         ?>
         <?php if ($orderData) : ?>
             <div class="row">
-                
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    
-                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 p-0 my-2">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-center">#</th>
+                                <th scope="col" class="text-center">Mã Đơn Hàng</th>
+                                <th scope="col" class="text-center">Ngày đặt</th>
+                                <th scope="col" class="text-center">Tình trạng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    
+                        </tbody>
+                    </table>
                 </div>
-                
-                
             </div>
         <?php else : ?>
             <div class="alert alert-info my-2" role="alert">

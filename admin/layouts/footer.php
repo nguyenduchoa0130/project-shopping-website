@@ -60,6 +60,7 @@
 <script src="/project-shopping-website/public/admin/js/category.js"></script>
 <script src="/project-shopping-website/public/admin/js/product.js"></script>
 <script src="/project-shopping-website/public/admin/js/account.js"></script>
+<script src="/project-shopping-website/public/admin/js/order.js"></script>
 </body>
 
 </html>

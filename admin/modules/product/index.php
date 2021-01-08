@@ -91,16 +91,6 @@ require_once __DIR__ . "/../../layouts/header.php";
 
         <hr class="my-3">
 
-        <!-- Review Product -->
-        <div class="row">
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <p class="h3 mb-0 text-gray-800 font-weight-bold text-decoration-none">
-                    <span><i class="fas fa-comments"></i></span> Bình Luận
-                </p>
-            </div>
-            <hr class="my-2">
-        </div>
-
     <?php else : ?>
         <div class="alert alert-warning" role="alert">
             Có lỗi đã xảy ra !!!
