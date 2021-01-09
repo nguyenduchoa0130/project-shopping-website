@@ -66,11 +66,11 @@ CREATE TABLE IF NOT EXISTS `tbl_image_product` (
 --
 
 
-DROP TABLE IF EXISTS tbl_category;
-CREATE TABLE IF NOT EXISTS tbl_category (
+DROP TABLE IF EXISTS `tbl_category`;
+CREATE TABLE IF NOT EXISTS `tbl_category` (
   id_category int(11) NOT NULL AUTO_INCREMENT,
   name_category varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  icon_category varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'fas fa-folder',
+  icon_category varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'fas fa-tags',
   PRIMARY KEY (id_category)
 ) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -84,8 +84,8 @@ CREATE TABLE IF NOT EXISTS tbl_category (
 -- Cấu trúc bảng cho bảng `tbl_product`
 --
 
-DROP TABLE IF EXISTS tbl_product;
-CREATE TABLE IF NOT EXISTS tbl_product (
+DROP TABLE IF EXISTS `tbl_product`;
+CREATE TABLE IF NOT EXISTS `tbl_product` (
   id_product int(11) NOT NULL AUTO_INCREMENT,
   name_product varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   price decimal(10,0) NOT NULL DEFAULT '0',
@@ -102,8 +102,6 @@ CREATE TABLE IF NOT EXISTS tbl_product (
 -- Đang đổ dữ liệu cho bảng `tbl_product`
 --
 
-
-
 -- --------------------------------------------------------
 
 --
@@ -111,8 +109,8 @@ CREATE TABLE IF NOT EXISTS tbl_product (
 --
 
 
-DROP TABLE IF EXISTS tbl_image_product;
-CREATE TABLE IF NOT EXISTS tbl_image_product (
+DROP TABLE IF EXISTS `tbl_image_product`;
+CREATE TABLE IF NOT EXISTS `tbl_image_product` (
   id_img int(11) NOT NULL AUTO_INCREMENT,
   name varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   image longblob,
@@ -125,8 +123,8 @@ CREATE TABLE IF NOT EXISTS tbl_image_product (
 -- Đang đổ dữ liệu cho bảng `tbl_product_img`
 --
 
-DROP TABLE IF EXISTS tbl_review;
-CREATE TABLE IF NOT EXISTS tbl_review (
+DROP TABLE IF EXISTS `tbl_review`;
+CREATE TABLE IF NOT EXISTS `tbl_review` (
   id_review int(11) NOT NULL AUTO_INCREMENT,
   id_user int(11) NOT NULL,
   id_product int(11) NOT NULL,
@@ -161,10 +159,12 @@ CREATE TABLE IF NOT EXISTS `tbl_order` (
   `id_user` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_deleveried` datetime DEFAULT NULL,
+  `date_delevery` datetime DEFAULT NULL,
   `date_completed` datetime DEFAULT NULL,
+  `address_ship` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ship_cash` int(11) NOT NULL DEFAULT '20000',
   `sum_cash` bigint(20) NOT NULL DEFAULT '0',
+  `note` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_order`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

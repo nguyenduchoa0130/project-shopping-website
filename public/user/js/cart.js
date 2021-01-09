@@ -2,14 +2,12 @@ $(document).ready(function () {
   $(".select-product").on("change", function (e) {
     if ($(this).prop("checked")) {
       let count = $("#order-detail-body tr").length;
-      let card = $(this).closest(".card");
+      let card = $(this).closest(".card-product-cart");
       let card_body = $(card).find(".card-body");
       let name = $(card_body).find(".name").html().trim();
       let price = Number.parseInt($(card_body).find(".price").html().slice(4));
       let quantity = $(card_body).find(".quantity").val();
-      let id_product = Number.parseInt(
-        $(card_body).find("input").attr("id").slice(9)
-      );
+      let id_product = Number.parseInt($(card).find("input[id]").attr("id"));
       let row = `
         <tr>
             <th scope="row" class='text-center h6' id='${id_product}'>${
@@ -21,34 +19,41 @@ $(document).ready(function () {
             <td class='text-center'>${price * quantity}</td>
       </tr>`;
       $("#order-detail-body").append(row);
-      let price_ship = Number.parseInt($("#price-ship").html()) + 10000 + 5000 * (quantity - 1);
-      let sum_cash = Number.parseInt($("#sum-cash").html()) + price * quantity + price_ship;
+      let price_ship =
+        Number.parseInt($("#price-ship").html()) + 10000 * quantity;
+      let temp_cash =
+        Number.parseInt($("#temp-cash").html()) + price * quantity;
+      let sum_cash = price_ship + temp_cash;
       $("#price-ship").html(`${price_ship}`);
+      $("#temp-cash").html(`${temp_cash}`);
       $("#sum-cash").html(`${sum_cash}`);
     } else {
       // lấy id của sản phẩm cần xóa
-      let count = $("#order-detail-body tr").length;
-      let card = $(this).closest(".card");
+      let card = $(this).closest(".card-product-cart");
       let card_body = $(card).find(".card-body");
-      let name = $(card_body).find(".name").html().trim();
       let price = Number.parseInt($(card_body).find(".price").html().slice(4));
       let quantity = $(card_body).find(".quantity").val();
-      let id_product = Number.parseInt(
-        $(card_body).find("input").attr("id").slice(9)
-      );
+      let id_product = Number.parseInt($(card).find("input[id]").attr("id"));
       // Lấy các dòng trong bảng đó ra
       let rows = $("#order-detail-body").find("tr");
       let rowRemove = null;
       for (const tr of rows) {
         if (rowRemove) {
-          tr.children[0].innerHTML = Number.parseInt(tr.children[0].innerHTML) - 1;
+          tr.children[0].innerHTML =
+            Number.parseInt(tr.children[0].innerHTML) - 1;
         } else {
           let id = Number.parseInt($(tr).find("th[id]").attr("id"));
           if (id === id_product) {
             rowRemove = tr;
-            let price_ship = Number.parseInt($("#price-ship").html()) - 10000 - 5000 * (quantity - 1);
-            let sum_cash = Number.parseInt($("#sum-cash").html()) - (price * quantity) - price_ship;
+            let price_ship =
+              Number.parseInt($("#price-ship").html()) - 10000 * quantity;
+            let temp_cash =
+              Number.parseInt($("#temp-cash").html()) - price * quantity;
+            let sum_cash =
+              Number.parseInt($("#sum-cash").html()) -
+              (10000 * quantity + price * quantity);
             $("#price-ship").html(`${price_ship}`);
+            $("#temp-cash").html(`${temp_cash}`);
             $("#sum-cash").html(`${sum_cash}`);
           }
         }
@@ -115,5 +120,47 @@ $(document).ready(function () {
         $("#cart-notification").modal("hide");
       }, 1000);
     }
+  });
+
+  $(".btn-remove-product-cart").on("click", function (e) {
+    let card = $(this).closest(".card-product-cart");
+    let id_cart = Number.parseInt($(card).attr("id"));
+    let card_body = $(card).find(".card-body");
+    let price = Number.parseInt($(card_body).find(".price").html().slice(4));
+    let quantity = $(card_body).find(".quantity").val();
+    let id_product = Number.parseInt($(card).find("input[id]").attr("id"));
+    // Lấy các dòng trong bảng đó ra
+    let rows = $("#order-detail-body").find("tr");
+    let rowRemove = null;
+    for (const tr of rows) {
+      if (rowRemove) {
+        tr.children[0].innerHTML =
+          Number.parseInt(tr.children[0].innerHTML) - 1;
+      } else {
+        let id = Number.parseInt($(tr).find("th[id]").attr("id"));
+        if (id === id_product) {
+          rowRemove = tr;
+          let price_ship =
+            Number.parseInt($("#price-ship").html()) - 10000 * quantity;
+          let temp_cash =
+            Number.parseInt($("#temp-cash").html()) - price * quantity;
+          let sum_cash =
+            Number.parseInt($("#sum-cash").html()) -
+            (10000 * quantity + price * quantity);
+          $("#price-ship").html(`${price_ship}`);
+          $("#temp-cash").html(`${temp_cash}`);
+          $("#sum-cash").html(`${sum_cash}`);
+        }
+      }
+    }
+    $(rowRemove).remove();
+    $.ajax({
+      type: "post",
+      url: "/project-shopping-website/modules/cart/remove.php",
+      data: {id_cart, id_product},
+      success: function (data) {
+        $("#list-cart-product").load(location.href + " #list-cart-product");
+      }
+    });
   });
 });

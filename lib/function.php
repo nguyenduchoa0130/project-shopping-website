@@ -347,7 +347,7 @@ function createStarRating($star)
     $star = ($star/10 >5) ? 5 :  ($star/10);
     $str = "";
     for ($i = 0; $i < (int)$star; $i++) {
-        $str .= "<span class='h3 m-0'><i class='fa fa-star text-waring'></i></span>";
+        $str .= "<span class='h3 m-0'><i class='fa fa-star text-warning'></i></span>";
     }
     for ($i = 0; $i < (int)(5 - $star); $i++) {
         $str .= "<span class='h3 m-0'><i class='fa fa-star text-muted'></i></span>";
@@ -441,13 +441,13 @@ function createCardProductLike($product, $img)
                     <p class='text-primary font-italic h5 mx-1'>Số Lượng: </p>
                     <div class='input-group'>
                         <span class='input-group-prepend'>
-                            <button type='button' class='btn btn-outline-danger btn-number' disabled='disabled' data-type='minus' data-field='quant[1]'>
+                            <button type='button' class='btn btn-outline-danger btn-number' data-type='minus' data-field='{$product->id_product}'>
                                 <span class='fa fa-minus'></span>
                             </button>
                         </span>
-                        <input type='text' id='quantity' name='quant[1]' class='form-control input-number text-center font-weight-bold' value='1' min='1' max='{$product->quantity}'>
+                        <input type='text' id='quantity' name='{$product->id_product}' class='form-control input-number text-center font-weight-bold' value='1' min='1' max='{$product->quantity}'>
                         <span class='input-group-append'>
-                            <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='quant[1]'>
+                            <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='{$product->id_product}'>
                                 <span class='fa fa-plus'></span>
                             </button>
                         </span>
@@ -476,11 +476,11 @@ function createCardProductLike($product, $img)
 </div>
             ";
 }
-function createCardProductCart($id_product, $name_product, $price, $quantitySelect, $quantityRemain, $img){
+function createCardProductCart($id_cart, $id_product, $name_product, $price, $quantitySelect, $quantityRemain, $img){
     $img = resizeImage($img, 150, 150);
     $src = createSrcImage($img["image"]);
     return "
-    <div class='card mb-3 mt-2 border border-primary container'>
+    <div class='card mb-3 mt-2 border border-primary container card-product-cart' id='$id_cart'>
         <div class='row'>
             <div class='col-xs-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0' style='border-right: 1px solid #1B8AF2'>
                 <div class='container h-100 d-flex justify-content-center align-items-center mt-2'>
@@ -497,11 +497,11 @@ function createCardProductCart($id_product, $name_product, $price, $quantitySele
                     <p class='card-text h6 text-info font-italic'>(Chỉ còn {$quantityRemain} sản phẩm)</p>
                     <div class='input-group w-50'>
                         <span class='input-group-prepend'>
-                            <button type='button' class='btn btn-outline-danger btn-number' disabled='disabled' data-type='minus' data-field='{$id_product}'>
+                            <button type='button' class='btn btn-outline-danger btn-number' data-type='minus' data-field='{$id_product}'>
                                 <span class='fa fa-minus'></span>
                             </button>
                         </span>
-                        <input type='text' id='quantity-{$id_product}' name='{$id_product}' class='form-control input-number text-center font-weight-bold quantity' value='{$quantitySelect}' min='1' max='{$quantityRemain}'>
+                        <input type='text' id='{$id_product}' name='{$id_product}' class='form-control input-number text-center font-weight-bold quantity' value='{$quantitySelect}' min='1' max='{$quantityRemain}'>
                         <span class='input-group-append'>
                             <button type='button' class='btn btn-outline-success btn-number' data-type='plus' data-field='{$id_product}'>
                                 <span class='fa fa-plus'></span>
@@ -511,7 +511,7 @@ function createCardProductCart($id_product, $name_product, $price, $quantitySele
                 </div>
             </div>
             <div class='col-xs-1 col-sm-1 col-md-1 col-lg-1 p-1 m-0 d-flex justify-content-end align-items-start'>
-                <button class='btn btn-danger' id='btn-remove-product-cart'><span class='h3 m-0'>×</span></button>
+                <button class='btn btn-danger btn-remove-product-cart'><span class='h3 m-0'>×</span></button>
             </div>
         </div>
     </div>
