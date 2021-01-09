@@ -81,18 +81,20 @@ $data = $database->fetchDataAll("tbl_category");
                         $total_record = 10;
                         $limit = 3;
                         $total_page = (ceil($total_record / $limit));
-                        // try {
-                        //     $data = $database->getProductSellest(0, $limit);
-                        //     $render = "";
-                        //     foreach ($data as $item) {
-                        //         $product = new Product($item);
-                        //         $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-                        //         $render .= createCardProduct($product, $imgs[0]);
-                        //     }
-                        //     echo $render;
-                        // } catch (PDOException $e) {
-                        //     echo "Có lỗi khi thao tác với database " . $e->getMessage();
-                        // }
+                        try {
+                            $data = $database->getProductSellest(0, $limit);
+                            $render = "";
+                            foreach ($data as $item) {
+                                $product = $database->fetchDataById("tbl_product", "id_product", $item["id_product"])[0];
+                                $product = new Product($product);
+                                $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
+                                $sold = $database->getSold($product->id_product);
+                                $render .= createCardProduct($product, $imgs[0], $sold);
+                            }
+                            echo $render;
+                        } catch (PDOException $e) {
+                            echo "Có lỗi khi thao tác với database " . $e->getMessage();
+                        }
                         ?>
                     </div>
                     <!-- Sản Phẩm -->
@@ -151,7 +153,8 @@ $data = $database->fetchDataAll("tbl_category");
                             foreach ($data as $item) {
                                 $product = new Product($item);
                                 $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-                                $render .= createCardProduct($product, $imgs[0]);
+                                $sold = $database->getSold($product->id_product);
+                                $render .= createCardProduct($product, $imgs[0], $sold);
                             }
                             echo $render;
                         } catch (PDOException $e) {
@@ -215,7 +218,8 @@ $data = $database->fetchDataAll("tbl_category");
                             foreach ($data as $item) {
                                 $product = new Product($item);
                                 $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-                                $render .= createCardProduct($product, $imgs[0]);
+                                $sold = $database->getSold($product->id_product);
+                                $render .= createCardProduct($product, $imgs[0], $sold);
                             }
                             echo $render;
                         } catch (PDOException $e) {

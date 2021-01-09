@@ -32,7 +32,7 @@ $(document).ready(function (event) {
       data: { task, page },
       success: function (data) {
         if (task === "sellest") {
-          // $("#list-10-product-sellest").html(data);
+          $("#list-10-product-sellest").html(data);
         }
         if (task === "likest") {
           $("#list-10-product-likest").html(data);

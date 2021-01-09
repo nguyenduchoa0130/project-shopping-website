@@ -104,7 +104,7 @@ $(document).ready(function () {
                   setTimeout(() => {
                     $("#cart-notification").modal("hide");
                     location.reload();
-                  }, 3000);
+                  }, 500);
                 }
               },
             });
@@ -159,8 +159,15 @@ $(document).ready(function () {
       url: "/project-shopping-website/modules/cart/remove.php",
       data: {id_cart, id_product},
       success: function (data) {
-        $("#list-cart-product").load(location.href + " #list-cart-product");
       }
+    }).done(function(){
+       $("#list-cart-product").load(" #list-cart-product > *");
     });
   });
+
 });
+  
+function updateDiv()
+{ 
+    $( "#list-cart-product" ).load(window.location.href + " #list-cart-product" );
+}

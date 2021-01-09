@@ -16,7 +16,8 @@ require_once __DIR__ . "/../../layouts/navbar.php";
             <?php
             $product = new Product($data);
             $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);
-            echo createCardProduct($product, $imgs[0]);
+            $sold = $database->getSold($product->id_product);
+            echo createCardProduct($product, $imgs[0], $sold);
             ?>
         <?php endforeach; ?>
     </div>

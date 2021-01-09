@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `tbl_account` (
   `phone` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `role` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_user`)
+  PRIMARY KEY (`id_user`) 
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `tbl_image_product`;

@@ -22,9 +22,9 @@ if ($currentUser) {
         ?>
         <?php if ($cartDetailData) : ?>
             <div class="row d-flex justify-content-between">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 p-0 ml-3">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 p-0 ml-3" id="list-cart-product">
                     <div class="container">
-                        <div class="row" id="list-cart-product">
+                        <div class="row">
                             <?php
                             $total_record  = count($cartDetailData);
                             $limit = 4;

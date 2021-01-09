@@ -359,7 +359,7 @@ function createSrcImage($strBase64)
 {
     return "data:image;base64, {$strBase64}";
 }
-function createCardProduct($product, $img)
+function createCardProduct($product, $img, $sold)
 {
     $img = resizeImage($img, 200, 200);
     $url = ROOT . "/modules/product/index.php?id_product={$product->id_product}";
@@ -410,7 +410,7 @@ function createCardProduct($product, $img)
                 <span class='text-info h3 d-block mb-2'>
                     <i class='fas fa-boxes'></i>
                 </span>
-                <span class='h5 font-weight-bold'>0</span>
+                <span class='h5 font-weight-bold'>{$sold}</span>
             </div>
         </div>
     </div>
