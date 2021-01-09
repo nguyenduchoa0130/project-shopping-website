@@ -24,7 +24,7 @@ body {
 .card-signin .card-img-left {
   width: 45%;
   /* Link to your background image using in the property below! */
-  background: scroll center url('https://i.ibb.co/9wTpJTJ/graphic-map.png"')
+  background: scroll center url("/project-shopping-website/public/admin/img/graphic-map.png")
     no-repeat;
   background-size: contain;
   position: relative;

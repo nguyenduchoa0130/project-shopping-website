@@ -61,7 +61,8 @@ if ($currentUser) {
                                 $status = new Status($order->status);
                                 ?>
                                 <tr>
-                                    <th scope="col" class="text-center"><?php echo $count;$count++; ?></th>
+                                    <th scope="col" class="text-center"><?php echo $count;
+                                                                        $count++; ?></th>
                                     <td scope="col" class="text-center"><?php echo $order->id_order; ?></td>
                                     <td scope="col" class="text-center"><?php echo $order->date_created; ?></td>
                                     <td scope="col" class="text-center"><?php echo $order->date_delevery; ?></td>
@@ -71,6 +72,7 @@ if ($currentUser) {
                                     <td scope="col" class="text-center"><?php echo $order->note ?></td>
                                     <?php if ($status->status_code == 1) : ?>
                                         <td scope="col" class="text-center">
+                                            <button type="button" class="btn btn-success" data-id="<?php echo $order->id_order; ?>" data-toggle="modal" data-target="#order-info"><span><i class="fas fa-calendar-week"></i></span></button>
                                             <button type="button" class="btn btn-danger" data-id="<?php echo $order->id_order; ?>" data-toggle="modal" data-target="#order-cancel"><span><i class="fas fa-times"></i></span></button>
                                         </td>
                                     <?php else : ?>

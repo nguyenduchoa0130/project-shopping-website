@@ -161,14 +161,14 @@ class Database
     }
     public function getProductNewest($start, $limit)
     {
-        $sql = "SELECT * FROM `tbl_product` ORDER BY `date_created` DESC LIMIT {$start}, {$limit};";
+        $sql = "SELECT * FROM `tbl_product` WHERE `quantity` > 0 ORDER BY `date_created` DESC LIMIT {$start}, {$limit};";
         $query = $this->connection->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
     public function getProductLikest($start, $limit)
     {
-        $sql = "SELECT * FROM `tbl_product` ORDER BY `number_liked` DESC  LIMIT {$start}, {$limit};";
+        $sql = "SELECT * FROM `tbl_product` WHERE `quantity` > 0 ORDER BY `number_liked` DESC  LIMIT {$start}, {$limit};";
         $query = $this->connection->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -177,7 +177,7 @@ class Database
     {
         $sql = "SELECT p.id_product, COUNT(*) 
                 FROM `tbl_product` AS p, `tbl_order` AS o, `tbl_order_detail` AS od 
-                WHERE o.id_order = od.id_order AND od.id_product = p.id_product AND o.status IN (2, 3) 
+                WHERE o.id_order = od.id_order AND od.id_product = p.id_product AND o.status IN (2, 3)
                 GROUP BY p.id_product ORDER BY  COUNT(*) DESC LIMIT {$start}, {$limit}";
         $query = $this->connection->prepare($sql);
         $query->execute();
@@ -250,9 +250,9 @@ class Database
     public function findProduct($key, $start = null, $limit = null)
     {
         if (!is_null($start) &&!is_null($limit)) {
-            $sql = "SELECT * FROM `tbl_product` WHERE LOWER(`name_product`) LIKE LOWER('%{$key}%') LIMIT {$start}, {$limit}";
+            $sql = "SELECT * FROM `tbl_product` WHERE LOWER(`name_product`) LIKE LOWER('%{$key}%') AND `quantity` > 0 LIMIT {$start}, {$limit}";
         } else {
-            $sql = "SELECT * FROM `tbl_product` WHERE LOWER(`name_product`) LIKE LOWER('%{$key}%')";
+            $sql = "SELECT * FROM `tbl_product` WHERE LOWER(`name_product`) LIKE LOWER('%{$key}%') AND `quantity` > 0";
         }
         $query = $this->connection->prepare($sql);
         $query->execute();

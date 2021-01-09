@@ -25,6 +25,7 @@
                     if($status->status_code == 1){
                         $rows.= "
                         <td scope='col' class='text-center'>
+                            <button type='button' class='btn btn-success' data-id='$order->id_order' data-toggle='modal' data-target='#order-info'><span><i class='fas fa-calendar-week'></i></span></button>
                             <button type='button' class='btn btn-danger' data-id='$order->id_order' data-toggle='modal' data-target='#order-cancel'><span><i class='fas fa-times'></i></span></button>
                         </td>
                     </tr>

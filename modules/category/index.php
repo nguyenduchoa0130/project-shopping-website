@@ -8,7 +8,7 @@ require_once __DIR__ . "/../../layouts/navbar.php";
         <?php
         if (isset($_GET["id"])) {
             $id_category = $_GET["id"];
-            $sql = "SELECT * FROM `tbl_product` WHERE `id_category` = {$id_category} LIMIT 0, 6";
+            $sql = "SELECT * FROM `tbl_product` WHERE `id_category` = {$id_category} AND `quantity` > 0 LIMIT 0, 6";
             $productData = $database->fetchSql($sql);
         }
         ?>
