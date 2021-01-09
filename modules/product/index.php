@@ -204,37 +204,46 @@ if (isset($_GET["id_product"])) {
             </div>
         <?php endif; ?>
         <hr class="my-2">
+        <div class="contaienr my-2 d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                    </li>
+                    <?php
+                    $commentData = $database->fetchDataById("tbl_review", "id_product", $product->id_product);
+                    $total_record = count($commentData);
+                    $limit = 5;
+                    $total_page = ceil($total_record / $limit);
+                    ?>
+                    <?php for ($i = 0; $i < $total_page; $i++) : ?>
+                        <li class="page-item">
+                            <a class="page-link" data-id="<?php echo $product->id_product; ?>" data-task="<?php echo "comment" ?>" data-page="<?php echo $i + 1 ?>"> <?php echo $i + 1 ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    <li class="page-item">
+                        <a class="page-link" href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <hr class="my-2">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="container" id="review">
-                    <?php 
-                        $reviewData = $database->fetchDataById("tbl_review", "id_product", $product->id_product);
-                        foreach($reviewData as $data){
-                            $name = $database->fetchDataById("tbl_account", "id_user", $data["id_user"])[0];
-                            $name = $name["fullname"];
-                            $star = $data["star"];
-                            $time = $data["date_review"];
-                            $message = $data["message"];
-                            echo createCardReview($name, $star, $time, $message);
-                        }
+                <div class="container" id="list-review">
+                    <?php
+                    $reviewData = $database->getComment("id_product", 0, 5);
+                    foreach ($reviewData as $data) {
+                        $name = $database->fetchDataById("tbl_account", "id_user", $data["id_user"])[0];
+                        $name = $name["fullname"];
+                        $star = $data["star"];
+                        $time = $data["date_review"];
+                        $message = $data["message"];
+                        echo createCardReview($name, $star, $time, $message);
+                    }
                     ?>
                 </div>
 
-                <div class="contaienr my-2 d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">&laquo;</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">&raquo;</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
         </div>
 

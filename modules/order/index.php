@@ -61,8 +61,7 @@ if ($currentUser) {
                                 $status = new Status($order->status);
                                 ?>
                                 <tr>
-                                    <th scope="col" class="text-center"><?php echo $count;
-                                                                        $count++; ?></th>
+                                    <th scope="col" class="text-center"><?php echo $count;$count++; ?></th>
                                     <td scope="col" class="text-center"><?php echo $order->id_order; ?></td>
                                     <td scope="col" class="text-center"><?php echo $order->date_created; ?></td>
                                     <td scope="col" class="text-center"><?php echo $order->date_delevery; ?></td>
@@ -85,28 +84,6 @@ if ($currentUser) {
                     </table>
                 </div>
             </div>
-
-            <div class="row mt-2">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="contaienr d-flex justify-content-center">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">&laquo;</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">&raquo;</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-
-            </div>
-
         <?php else : ?>
             <div class="alert alert-info my-2" role="alert">
                 <strong>Bạn không có đơn hàng nào</strong>

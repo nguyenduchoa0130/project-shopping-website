@@ -17,10 +17,10 @@ if ($currentUser) {
             $data = $database->fetchDataById("tbl_like", "id_user", $currentUser->id_user);
             // data chứa id_user và id_product
             $total_record = count($data);
-            $limit = 3;
+            $limit = 6;
             $total_page = (ceil($total_record / $limit));
             // lấy sản phẩm yêu thích
-            $listProducts = $database->getProductLike($currentUser->id_user, 0, 3);
+            $listProducts = $database->getProductLike($currentUser->id_user, 0, 6);
             $render = "";
             foreach ($listProducts as $product) {
                 $imgs = $database->fetchDataById("tbl_image_product", "id_product", $product->id_product);

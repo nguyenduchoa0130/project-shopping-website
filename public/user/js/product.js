@@ -81,6 +81,10 @@ $(document).ready(function () {
             let noti = JSON.parse(data);
             $("#review-notification").modal("show");
             $("#review-notification-body").html(noti["message"]);
+            setTimeout(() => {
+              $("#review-notification").modal("hide");
+              window.location.reload();
+            }, 1000);
           },
         });
       },

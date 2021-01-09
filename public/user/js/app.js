@@ -16,20 +16,16 @@ $(document).ready(function (event) {
     });
   });
   $(".page-link").on("click", function (e) {
-    if(window.page){
-      $(window.page).removeClass("active");
-    }
-    $(this).addClass("active");
-    if(!($(window.page).hasClass("previous") || $(window.page).hasClass("after"))){
-      window.page = $(this);
-      console.log(window.page);
-    }
     let task = $(this).data("task");
     let page = ($(this).data("page") - 1) * 3;
+    let id_product = $(this).data("id");
+    let id_category = $(this).data("category");
+    console.log(id_category);
+    let key = $(this).data("key");
     $.ajax({
       type: "post",
       url: "/project-shopping-website/lib/pagination.php",
-      data: { task, page },
+      data: { task, page, id_product, key , id_category},
       success: function (data) {
         if (task === "sellest") {
           $("#list-10-product-sellest").html(data);
@@ -43,16 +39,18 @@ $(document).ready(function (event) {
         if(task === "productLike"){
           $("#list-product-like").html(data);
         }
+        if(task === "comment"){
+          $("#list-review").html(data);
+        }
+        if(task === "key"){
+          $("#list-find").html(data);
+        }
+        if(task === "category"){
+          $("#list-category").html(data);
+        }
       },
     });
   });
-  $(".previous").on("click", function(e){
-    alert("previous");
-  })
-  $(".next").on("click", function(e){
-    alert("after");
-  })
-
   $(".btn-number").click(function (e) {
     e.preventDefault();
     fieldName = $(this).attr("data-field");
