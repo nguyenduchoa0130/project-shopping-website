@@ -19,23 +19,23 @@ require_once __DIR__ . "/../autoload/autoload.php";
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <img class="header" src="https://i.ibb.co/rH95gSt/shop-logo.png" alt="shop-logo" width="90%" height="150px">
+                <img class="header" src="<?php echo ROOT."/public/admin/img/img3.jpg" ?>" alt="shop-logo" width="90%" height="150px">
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="slideshow-container">
                     <div class="mySlides fade">
-                        <img class="header slide-image" src="https://i.ibb.co/K2LD5GD/iphone12.jpg" alt="iphone12" width="100%" height="150px">
+                        <img class="header slide-image" src="<?php echo ROOT."/public/admin/img/img1.jpg" ?>" alt="iphone12" width="100%" height="150px">
                     </div>
                     <div class="mySlides fade">
-                        <img class="header slide-image" src="https://i.ibb.co/ZGCLvFP/banner-shopping-super-sale.png" alt="banner-shopping-super-sale" width="100%" height="150px">
+                        <img class="header slide-image" src="<?php echo ROOT."/public/admin/img/img2.jpg" ?>" alt="banner-shopping-super-sale" width="100%" height="150px">
                     </div>
                     <div class="mySlides fade">
-                        <img class="header slide-image" src="https://i.ibb.co/x5C7kvN/online-shopping-banner.jpg" alt="online-shopping-banner" width="100%" height="150px">
+                        <img class="header slide-image" src="<?php echo ROOT."/public/admin/img/img5.jpg" ?>" alt="online-shopping-banner" width="100%" height="150px">
                     </div>
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <img class="header" src="https://i.ibb.co/vVDfNqw/logo-main.png" alt="logo-main" width="100%" height="150px">
+                <img class="header" src="<?php echo ROOT."/public/admin/img/img4.jpg" ?>" alt="logo-main" width="100%" height="150px">
             </div>
         </div>
     </div>

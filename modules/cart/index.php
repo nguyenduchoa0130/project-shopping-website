@@ -42,8 +42,8 @@ if ($currentUser) {
                     </div>
                 </div>
 
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 my-2">
-                    <div class="card">
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 my-2 position-relative" >
+                    <div class="card" id="card-order">
                         <table class="table m-0" id="order-detail">
                             <thead>
                                 <tr>
@@ -89,7 +89,7 @@ if ($currentUser) {
                             </tfoot>
                         </table>
                     </div>
-
+                    <a href="#card-order" class="btn btn-primary btn-circle btn-xl float-right m-2 position-fixed" style="right: 0;"><i class="fas fa-arrow-up"></i></a>
                 </div>
             </div>
         <?php else : ?>

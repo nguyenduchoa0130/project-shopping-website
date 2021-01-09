@@ -150,6 +150,7 @@ $(document).ready(function () {
           $("#price-ship").html(`${price_ship}`);
           $("#temp-cash").html(`${temp_cash}`);
           $("#sum-cash").html(`${sum_cash}`);
+          $(card).remove();
         }
       }
     }
@@ -159,15 +160,10 @@ $(document).ready(function () {
       url: "/project-shopping-website/modules/cart/remove.php",
       data: {id_cart, id_product},
       success: function (data) {
+       
       }
-    }).done(function(){
-       $("#list-cart-product").load(" #list-cart-product > *");
     });
   });
 
 });
   
-function updateDiv()
-{ 
-    $( "#list-cart-product" ).load(window.location.href + " #list-cart-product" );
-}
