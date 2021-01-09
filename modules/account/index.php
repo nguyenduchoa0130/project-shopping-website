@@ -26,10 +26,10 @@ $currentUser = $database->getCurrentUser();
             <div class="col-md-3">
                 <div class="list-group font-weight-bold">
                     <a href="javascript:window.location.href=window.location.href" class="list-group-item list-group-item-action active"><span><i class="fas fa-id-card mr-2"></i></span>Thông Tin Cá Nhân</a>
-                    <a href="#" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-archive mr-2"></i></span>Đơn Hàng</a>
-                    <a href="#" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-heart mr-2"></i></i></span>Yêu Thích</a>
-                    <a href="#" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-shopping-cart mr-2"></i></i></span> Giỏ Hàng</a>
-                    <a href="../../index.php" class="list-group-item list-group-item-action text-success"><span><i class="fas fa-store mr-2"></i></span>Trở lại mua sắm</a>
+                    <a href="<?php echo ROOT. "/modules/order/index.php"?>" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-archive mr-2"></i></span>Đơn Hàng</a>
+                    <a href="<?php echo ROOT. "/modules/like/index.php"?>" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-heart mr-2"></i></i></span>Yêu Thích</a>
+                    <a href="<?php echo ROOT. "/modules/cart/index.php"?>" class="list-group-item list-group-item-action text-primary"><span><i class="fas fa-shopping-cart mr-2"></i></i></span> Giỏ Hàng</a>
+                    <a href="<?php echo ROOT. "/index.php"?>" class="list-group-item list-group-item-action text-success"><span><i class="fas fa-store mr-2"></i></span>Trở lại mua sắm</a>
                     <a href="logout.php" class="list-group-item list-group-item-action text-danger"><span><i class="fas fa-sign-out-alt mr-2"></i></i></span>Đăng Xuất</a>
                 </div>
             </div>

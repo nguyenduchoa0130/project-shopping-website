@@ -4,25 +4,25 @@ $currentUser = $database->getCurrentUser();
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary">
-    <a class="navbar-brand text-white h5 m-0 mx-2" href="<?php echo ROOT."/index.php"; ?>"><span class="mr-3"><i class="fas fa-home"></i></span>Trang Chủ</a>
+    <a class="navbar-brand text-white h5 m-0 mx-2" href="<?php echo ROOT . "/index.php"; ?>"><span class="mr-3"><i class="fas fa-home"></i></span>Trang Chủ</a>
     <button class="navbar-toggler text-white font-weight-bold" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         ☰
     </button>
-    <form class="form-inline my-2 my-lg-0" id="formFindProduct">
-        <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm sản phẩm....." aria-label="Search" size="50">
+    <form class="form-inline my-2 my-lg-0" id="formFindProduct" method="get" action="<?php echo ROOT . "/modules/find/index.php"; ?>">
+        <input class="form-control mr-sm-2" type="search" name="key" placeholder="Tìm kiếm sản phẩm....." aria-label="Search" size="50">
         <button class="btn btn-outline-info my-2 my-sm-0 text-white" type="submit"><span><i class="fas fa-search"></i></span>
         </button>
     </form>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ml-3">
-                <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT."/modules/order/index.php"; ?>"><span class="mr-3"><i class="fas fa-parachute-box"></i></span>Đơn Hàng</a>
+                <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT . "/modules/order/index.php"; ?>"><span class="mr-3"><i class="fas fa-parachute-box"></i></span>Đơn Hàng</a>
             </li>
             <li class="nav-item ml-3">
-                <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT."/modules/cart/index.php"; ?>"><span class="mr-3"><i class="fas fa-shopping-cart"></i></span>Giỏ Hàng</a>
+                <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT . "/modules/cart/index.php"; ?>"><span class="mr-3"><i class="fas fa-shopping-cart"></i></span>Giỏ Hàng</a>
             </li>
             <li class="nav-item ml-3">
-                <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT."/modules/like/index.php"; ?>"><span class="mr-3"><i class="fas fa-heart"></i></span>Yêu Thích</a>
+                <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT . "/modules/like/index.php"; ?>"><span class="mr-3"><i class="fas fa-heart"></i></span>Yêu Thích</a>
             </li>
             <?php if ($currentUser) : ?>
                 <li class="nav-item ml-3">
@@ -30,7 +30,7 @@ $currentUser = $database->getCurrentUser();
                 </li>
                 <?php if ($currentUser["role"] == "0") : ?>
                     <li class="nav-item ml-3">
-                        <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT."/admin/index.php"; ?>"><span class="mr-3"><i class="fas fa-tools"></i></span> Admin</a>
+                        <a class="nav-link h5 m-0 text-white" href="<?php echo ROOT . "/admin/index.php"; ?>"><span class="mr-3"><i class="fas fa-tools"></i></span> Admin</a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item ml-3">
@@ -61,7 +61,7 @@ $currentUser = $database->getCurrentUser();
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <a type="button" class="btn btn-primary" href="<?php echo ROOT."/modules/account/login.php"; ?>">Đăng Nhập</a>
+                <a type="button" class="btn btn-primary" href="<?php echo ROOT . "/modules/account/login.php"; ?>">Đăng Nhập</a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
             </div>
         </div>

@@ -13,7 +13,7 @@ $data = $database->fetchDataAll("tbl_category");
                         $category = new Category($item);
                         ?>
                         <li class="list-group-item category-item">
-                            <a href="" class="item h5 text-primary text-decoration-none d-block w-100 m-0">
+                            <a href="<?php echo ROOT."/modules/category/index.php?id={$category->get_IdCategory()}"; ?>" class="item h5 text-primary text-decoration-none d-block w-100 m-0">
                                 <i class="<?php echo $category->get_ImgCategory(); ?>"></i>
                                 <?php echo $category->get_NameCategory() ?>
                             </a>

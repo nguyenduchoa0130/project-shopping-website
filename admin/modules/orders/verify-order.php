@@ -1,6 +1,6 @@
 <?php
     require_once __DIR__. "/../../../autoload/autoload.php";
-    if(isset($_POST["id_order"]) &&$_POST["action"] && isset($_POST["dataSend"])){
+    if(isset($_POST["id_order"]) && $_POST["action"] && isset($_POST["dataSend"])){
         $noti = null;
         $id_order = $_POST["id_order"];
         $action = $_POST["action"];
@@ -27,7 +27,6 @@
             try{
                 $note = $dataSend[0];
                 $database->updateStatusOrder($id_order, C_CANCELLED, null, null, $note);
-                $database->delete("tbl_order_detail", "id_order", $id_order);
                 $noti = new Notification(C_CANCELLED, "Đã từ chối đơn hàng");
             }catch(PDOException $e){
                 $noti = new Notification(C_ERROR, "Lỗi khi thao tác với database ". $e->getMessage());

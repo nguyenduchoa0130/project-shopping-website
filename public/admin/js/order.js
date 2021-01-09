@@ -137,6 +137,7 @@ $(document).ready(function () {
               "/project-shopping-website/admin/modules/orders/complete-order.php",
             data: { id_order },
             success: function (data) {
+              let noti = JSON.parse(data);
               if (noti["noti_code"] != 0) {
                 $("#order-notification").modal("show");
                 $("#order-notification-body").html(noti["message"]);

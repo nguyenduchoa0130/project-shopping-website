@@ -49,9 +49,11 @@ if ($currentUser) {
                                 <th scope="col" class="text-center">#</th>
                                 <th scope="col" class="text-center">Mã ĐH</th>
                                 <th scope="col" class="text-center">Người Đặt</th>
+                                <th scope="col" class="text-center">Địa chỉ</th>
+                                <th scope="col" class="text-center">SĐT</th>
                                 <th scope="col" class="text-center">Ngày Đặt</th>
-                                <th scope="col" class="text-center">Ngày Giao Dự Kiến</th>
-                                <th scope="col" class="text-center">Ngày Hoàn Thành</th>
+                                <th scope="col" class="text-center">Dự Kiến</th>
+                                <th scope="col" class="text-center">Đã Giao</th>
                                 <th scope="col" class="text-center">Tình Trạng</th>
                                 <th scope="col" class="text-center">Tổng Tiền</th>
                                 <th scope="col" class="text-center">Ghi chú</th>
@@ -66,26 +68,30 @@ if ($currentUser) {
                                 <?php
                                 $order = new Order($data);
                                 $status = new Status($order->status);
-                                $name_user = $database->fetchDataById("tbl_account", "id_user", $order->id_user)[0]["fullname"];
+                                $user =  $database->fetchDataById("tbl_account", "id_user", $order->id_user)[0];
+                                $name_user =  $user["fullname"];
+                                $address = $user["address"];
+                                $phone = $user["phone"];
+                                $a = new DateTime($order->date_created);
+                                $b = new DateTime($order->date_delevery);
+                                $c = new DateTime($order->date_completed);
+                                $created = ($order->date_created != null) ? (date_format($a, "Y-m-d")) : "";
+                                $delevery = ($order->date_delevery != null) ? (date_format($b, "Y-m-d")) : "";
+                                $complete = ($order->date_completed != null) ? (date_format($c, "Y-m-d")) : "";
                                 ?>
                                 <tr>
-                                    <th scope="row" class="text-center"><?php echo $count;
-                                                                        $count++; ?></th>
-                                    <td class="text-center"><?php echo $order->id_order ?></td>
-                                    <td class="text-center"><?php echo $name_user ?></td>
-                                    <td class="text-center"><?php echo $order->date_created; ?></td>
-                                    <td class="text-center">
-                                        <?php
-                                        echo ($order->date_delevery != null) ? $order->date_delevery : "--/--/----"; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php
-                                        echo ($order->date_completed != null) ? $order->date_completed : "--/--/----"; ?>
-                                    </td>
-                                    <td class="text-center"><?php echo $status->message; ?></td>
-                                    <td class="text-center"><?php echo $order->sum_cash; ?></td>
-                                    <td class="text-center"><?php echo $order->note; ?></td>
-                                    <td class="text-center">
+                                    <th scope="row" class="text-center px-0"><?php echo $count;$count++; ?></th>
+                                    <td class="text-center px-0"><?php echo $order->id_order ?></td>
+                                    <td class="text-center px-0"><?php echo $name_user ?></td>
+                                    <td class="text-center px-0"><?php echo $address ?></td>
+                                    <td class="text-center px-0"><?php echo $phone ?></td>
+                                    <td class="text-center px-0"><?php echo $created ?></td>
+                                    <td class="text-center px-0"><?php echo $delevery?></td>
+                                    <td class="text-center px-0"><?php echo $complete; ?></td>
+                                    <td class="text-center px-0"><?php echo $status->message; ?></td>
+                                    <td class="text-center px-0"><?php echo $order->sum_cash; ?></td>
+                                    <td class="text-center px-0"><?php echo $order->note; ?></td>
+                                    <td class="text-center px-0">
                                         <button class="btn btn-success btn-order-detail" data-date="<?php echo $order->date_created; ?>" data-id="<?php echo $order->id_order; ?>" data-toggle="modal" data-target="#order-detail"><i class="fas fa-calendar-week"></i></button>
                                     </td>
                                 </tr>

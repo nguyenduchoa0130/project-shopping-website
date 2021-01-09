@@ -366,8 +366,8 @@ function createCardProduct($product, $img)
     $src = createSrcImage($img['image']);
     $header =
         "
-    <div class='card border border-secondary mb-4 mr-2 col-xs-2 col-sm-2 col-md-3 col-lg-3'>
-    <a href='{$url}' class='position-relative d-block m-auto'>
+    <div class='card border border-secondary mb-4 mr-2 py-1 col-xs-2 col-sm-2 col-md-3 col-lg-3'>
+    <a href='{$url}' class='position-relative d-block m-auto '>
         <img src='{$src}' alt='image'>
     </a>
     <div class='card-body'>
@@ -424,7 +424,7 @@ function createCardProductLike($product, $img)
     $img = resizeImage($img, 250, 150);
     $src = createSrcImage($img["image"]);
     return "
-    <div class='card shadow-sm border-primary mb-4 p-0 col-xs-3 col-sm-3 col-md-3 col-lg-3 '>
+    <div class='card shadow-sm border-primary mb-4 p-0 py-2 col-xs-3 col-sm-3 col-md-3 col-lg-3 '>
         <a href='{$url}' class='text-decoration-none position-relative '>
             <img src='{$src}' class='card-img-top' alt='image'> </a>
         <div class='card-body  position-relative'>
