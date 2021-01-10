@@ -138,7 +138,7 @@ DROP TABLE IF EXISTS `tbl_order`;
 CREATE TABLE IF NOT EXISTS `tbl_order` (
   `id_order` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '1',
   `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_delevery` datetime DEFAULT NULL,
   `date_completed` datetime DEFAULT NULL,
@@ -178,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `price` decimal(10,0) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `number_liked` int(11) NOT NULL DEFAULT '0',
+  `star` int(11) NOT NULL DEFAULT 0,
   `quantity` int(11) NOT NULL DEFAULT '0',
   `produced_at` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
