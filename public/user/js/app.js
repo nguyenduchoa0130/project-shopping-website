@@ -42,7 +42,7 @@ $(document).ready(function (event) {
         if(task === "comment"){
           $("#list-review").html(data);
         }
-        if(task === "key"){
+        if(task === "find"){
           $("#list-find").html(data);
         }
         if(task === "category"){
