@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "fullname" => $_POST["fullname"],
             "gender" => $_POST["gender"],
             "birth" => $_POST["birth"],
+            "phone" => $_POST["phone"],
             "address" => $_POST["address"]
         );
 
